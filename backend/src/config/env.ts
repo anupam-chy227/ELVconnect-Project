@@ -3,6 +3,20 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const firstCorsOrigin = process.env.CORS_ORIGINS
+  ?.split(',')
+  .map((origin) => origin.trim())
+  .find(Boolean);
+
+const normalizedEnv = {
+  ...process.env,
+  CLIENT_URL: process.env.CLIENT_URL || firstCorsOrigin || 'http://localhost:5173',
+};
+
+if (!process.env.CLIENT_URL) {
+  console.warn('CLIENT_URL is not set. Falling back to CORS_ORIGINS first value for startup.');
+}
+
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().default(5000),
@@ -25,7 +39,7 @@ const envSchema = z.object({
   SENTRY_DSN: z.string().optional(),
 });
 
-const parsed = envSchema.safeParse(process.env);
+const parsed = envSchema.safeParse(normalizedEnv);
 if (!parsed.success) {
   console.error('❌ Invalid environment variables:', parsed.error.flatten().fieldErrors);
   process.exit(1);

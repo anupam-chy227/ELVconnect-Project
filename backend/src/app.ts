@@ -12,6 +12,9 @@ import router from './routes';
 const app = express();
 
 // Health & readiness checks (before heavy middleware, no auth, no rate limit)
+app.get('/', (_req, res) => {
+  res.send('ELV Backend Live 🚀');
+});
 app.get('/health', (_req, res) => res.status(200).json({ status: 'ok' }));
 app.get('/ready', (_req, res) => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
