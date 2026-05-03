@@ -1,0 +1,197 @@
+[browser] Encountered two children with the same key, `toast-1777482573462`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4104:33)
+    at runWithFiberInDEV (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at warnOnInvalidKey (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4103:21)
+    at reconcileChildrenArray (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4129:160)
+    at reconcileChildFibersImpl (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4236:51)
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4261:39)
+    at reconcileChildren (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5898:119)
+    at beginWork (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6758:1573)
+    at runWithFiberInDEV (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at performUnitOfWork (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9555:97)
+    at workLoopSync (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9449:40)
+    at renderRootSync (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4104:33)
+⚠ Fast Refresh had to perform a full reload when ./src/components/Toast/ToastContext.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:793:21) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:793:21) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0r4zxo4._.js:244:17) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0r4zxo4._.js:244:17) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:793:21) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:765:13)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:789:29) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:765:13)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:789:29) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:765:13)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:789:29) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:793:21) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:793:21) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Image with src "/ELVconnect_logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0r4zxo4._.js:244:17) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0r4zxo4._.js:244:17) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0r4zxo4._.js:244:17) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at <unknown> (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0r4zxo4._.js:244:17) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:765:13)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:789:29) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+[browser] Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render. 
+    at getRootForUpdatedFiber (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+    at enqueueConcurrentHookUpdate (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2951:16)
+    at dispatchSetStateInternal (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5642:22)
+    at dispatchSetState (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5615:9)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:765:13)
+    at useQuery.useCallback[fetchData] (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/src_0ur7~9k._.js:789:29) (file://C:/Users/HP/OneDrive/Desktop/ELV CONNECT/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:2968:143)
+⚠ Fast Refresh had to perform a full reload when ./src/components/Toast/ToastContext.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[browser] Uncaught Error: ./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8
+the name `React` is defined multiple times
+  158 | }
+  159 |
+> 160 | import React from "react";
+      |        ^^^^^
+  161 |
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8)
+    at <unknown> (Error: (./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8)
+[browser] Uncaught Error: ./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8
+the name `React` is defined multiple times
+  158 | }
+  159 |
+> 160 | import React from "react";
+      |        ^^^^^
+  161 |
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8)
+    at <unknown> (Error: (./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8)
+[browser] Uncaught Error: ./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8
+the name `React` is defined multiple times
+  158 | }
+  159 |
+> 160 | import React from "react";
+      |        ^^^^^
+  161 |
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/dashboard/invoices/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8)
+    at <unknown> (Error: (./src/app/(dashboard)/dashboard/invoices/page.tsx:160:8)

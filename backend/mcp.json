@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mongodb-mcp-server",
+        "--connectionString",
+        "mongodb+srv://canupam227_db_user:dy2FtT8nb69hUeIv@cluster0.rcojgh6.mongodb.net/ELV_connect"
+      ]
+    },
+    "Postman": {
+      "url": "https://mcp.postman.com/mcp"
+    }
+  }
+}
