@@ -278,7 +278,7 @@ export default function AdminCityInsightsPage() {
               className={`rounded-md border p-4 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${
                 activeCity.city === city.city
                   ? "border-indigo-300 bg-indigo-50/80 ring-4 ring-indigo-100 dark:border-indigo-800 dark:bg-indigo-950/35 dark:ring-indigo-950"
-                  : "border-slate-200 bg-white/85 hover:border-indigo-200 dark:border-slate-800 dark:bg-slate-950/75"
+                  : "border-slate-200 bg-white/85 hover:border-primary/35 dark:border-slate-800 dark:bg-slate-950/75"
               }`}
             >
               <div className="flex items-start justify-between gap-3">
@@ -325,7 +325,7 @@ export default function AdminCityInsightsPage() {
                     <button
                       type="button"
                       onClick={() => setSelectedCity(city.city)}
-                      className="font-black text-slate-900 transition hover:text-indigo-700 dark:text-white dark:hover:text-indigo-200"
+                      className="font-black text-slate-900 transition hover:text-primary dark:text-white dark:hover:text-primary"
                     >
                       {city.city}
                     </button>
@@ -414,11 +414,11 @@ export default function AdminCityInsightsPage() {
                     <span
                       className={`relative flex items-center justify-center rounded-full border text-[10px] font-black shadow-xl transition ${getCityBubbleClassName(city.city)} ${
                         active
-                          ? "border-indigo-200 bg-indigo-600 text-white shadow-indigo-500/30"
-                          : "border-white/80 bg-white text-indigo-700 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-950 dark:text-indigo-200"
+                          ? "border-primary/30 bg-primary text-on-primary shadow-primary/30"
+                          : "border-white/80 bg-white text-primary hover:bg-primary-subtle dark:border-slate-700 dark:bg-slate-950 dark:text-primary"
                       }`}
                     >
-                      {active ? <span className="absolute inset-0 animate-ping rounded-full bg-indigo-500/30" /> : null}
+                      {active ? <span className="absolute inset-0 animate-ping rounded-full bg-primary/30" /> : null}
                       <span className="relative">{city.projects}</span>
                     </span>
                     <span className="mt-2 block rounded-full bg-white/90 px-2 py-1 text-[11px] font-black text-slate-700 shadow-sm dark:bg-slate-950/90 dark:text-slate-200">

@@ -24,14 +24,18 @@ export function WorkspaceShell({
   subtitle,
   children,
   actions,
+  notice,
 }: {
   title: string;
   subtitle: string;
   children: React.ReactNode;
   actions?: React.ReactNode;
+  notice?: React.ReactNode;
 }) {
   return (
     <div className="premium-shell min-h-screen text-foreground">
+      {notice ? <div className="mx-auto max-w-7xl px-4 pt-4">{notice}</div> : null}
+
       <div className="mx-auto grid max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[220px_1fr]">
         <Card variant="default" padding="sm" className="hidden lg:block">
           <div className="mb-4 rounded-md bg-primary-subtle p-3">

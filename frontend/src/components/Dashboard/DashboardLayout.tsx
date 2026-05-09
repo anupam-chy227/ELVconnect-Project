@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -22,6 +21,7 @@ import {
 } from "lucide-react";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/hooks/useAuth";
+import ThemeLogo from "@/components/ThemeLogo";
 
 type MenuItem = {
   label: string;
@@ -123,13 +123,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         >
           <div className="flex h-20 items-center justify-between border-b border-border-subtle bg-surface-raised/80 px-4 backdrop-blur-xl">
             <Link href="/dashboard" className="flex min-w-0 items-center gap-3">
-              <Image
-                src="/ELVLOGO-HQ.png"
-                alt="ELV Connect"
-                width={170}
-                height={48}
+              <ThemeLogo
                 className={collapsed ? "h-10 w-10 rounded-md object-cover object-left" : "h-12 w-auto object-contain"}
                 priority
+                sizes={collapsed ? "40px" : "170px"}
               />
               {!collapsed ? (
                 <div className="min-w-0">
@@ -192,7 +189,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           <div className="border-t border-border-subtle p-3">
             <Link
               href={user?.role === "service_provider" ? "/jobs" : "/dashboard/jobs/create"}
-              className={`mb-2 flex items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-2.5 text-sm font-bold text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:shadow-floating ${
+              className={`mb-2 flex items-center justify-center gap-2 rounded-md bg-primary px-3 py-2.5 text-sm font-bold text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:bg-primary-container hover:shadow-floating ${
                 collapsed ? "px-2" : ""
               }`}
             >

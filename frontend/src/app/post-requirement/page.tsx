@@ -442,7 +442,7 @@ export default function PostRequirementPage() {
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="mt-5 rounded-md bg-gradient-to-b from-primary to-primary-container px-5 py-3 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:shadow-floating focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
+                    className="mt-5 rounded-md bg-primary px-5 py-3 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:bg-primary-container hover:shadow-floating focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
                   >
                     Post another requirement
                   </button>
@@ -605,7 +605,7 @@ export default function PostRequirementPage() {
                         <button
                           type="button"
                           onClick={nextStep}
-                          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-5 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:shadow-floating focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
+                          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:bg-primary-container hover:shadow-floating focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
                         >
                           Continue
                           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -613,7 +613,7 @@ export default function PostRequirementPage() {
                       ) : (
                         <button
                           type="submit"
-                          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-5 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:shadow-floating focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
+                          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:bg-primary-container hover:shadow-floating focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
                         >
                           <Send className="h-4 w-4" aria-hidden="true" />
                           Submit requirement

@@ -5,20 +5,114 @@ import Link from "next/link";
 import {
   ArrowUpDown,
   BadgeCheck,
+  Briefcase,
+  Building2,
   CalendarCheck,
   MapPin,
   Search,
   ShieldCheck,
   Star,
   Timer,
+  Users,
 } from "lucide-react";
 import { DataCard, StatusPill, WorkspaceShell } from "@/components/ELVConnect/WorkspaceShell";
-import { vendors } from "@/lib/elv-demo-data";
+import { useExperiencePreferences } from "@/hooks/useExperiencePreferences";
+import { useQuery } from "@/hooks/useQuery";
+import { appendLocationSearchParams, locationMatchesPlace } from "@/lib/experience-preferences";
+import { vendors as demoVendors } from "@/lib/elv-demo-data";
+import type { Job, LocationMatchResponse, User } from "@/types";
 
 type SortKey = "rating" | "distance" | "responseTime";
 
+type MatchVendorCard = {
+  id: string;
+  name: string;
+  category: string;
+  city: string;
+  rating: number;
+  response: string;
+  responseMinutes: number;
+  radius: string;
+  distance: number;
+  projectCount: number;
+  certifications: string[];
+  source: "live" | "demo";
+};
+
 const categories = ["All", "CCTV", "Fire", "Networking", "Access Control", "BMS"];
 const certificationFilters = ["All", "ISO 9001", "Hikvision", "NBC Compliance", "Cisco", "HID", "BACnet"];
+
+const categoryLabels: Record<string, string> = {
+  cctv: "CCTV",
+  fire_alarm: "Fire",
+  access_control: "Access Control",
+  structured_cabling: "Networking",
+  bms: "BMS",
+  pa_system: "PA System",
+  intercom: "Intercom",
+  gate_automation: "Gate Automation",
+  av_integration: "AV",
+  other: "ELV",
+};
+
+function getMatchUrl(category: string, location: ReturnType<typeof useExperiencePreferences>["location"]) {
+  const params = new URLSearchParams({ limit: "12" });
+
+  if (category !== "All") {
+    params.set("category", category);
+  }
+
+  return appendLocationSearchParams(`/matches/location?${params.toString()}`, location);
+}
+
+function toLiveVendorCard(user: User): MatchVendorCard {
+  const serviceProvider = user.serviceProvider;
+  const primaryCategory = serviceProvider?.specializations?.[0] || "other";
+  const serviceRadius = serviceProvider?.serviceRadius || 25;
+
+  return {
+    id: user._id,
+    name: user.profile.companyName || user.profile.fullName,
+    category: categoryLabels[primaryCategory] || primaryCategory.replace(/_/g, " "),
+    city: serviceProvider?.serviceArea?.city || "Matched location",
+    rating: serviceProvider?.averageRating || 4.6,
+    response: "Live profile",
+    responseMinutes: 30,
+    radius: `${serviceRadius} km`,
+    distance: serviceRadius,
+    projectCount: serviceProvider?.totalJobsCompleted || 0,
+    certifications: serviceProvider?.certifications?.length ? serviceProvider.certifications : ["Verified ELV profile"],
+    source: "live",
+  };
+}
+
+function toDemoVendorCard(vendor: (typeof demoVendors)[number]): MatchVendorCard {
+  return {
+    ...vendor,
+    source: "demo",
+  };
+}
+
+function getCustomerName(customer: User) {
+  return customer.profile.companyName || customer.profile.fullName || "Verified customer";
+}
+
+function getJobBudget(job: Job) {
+  if (job.budget.type === "get_quotes") {
+    return "Get quotes";
+  }
+
+  const currency = job.budget.currency || "INR";
+  if (job.budget.min && job.budget.max) {
+    return `${currency} ${job.budget.min.toLocaleString()} - ${job.budget.max.toLocaleString()}`;
+  }
+
+  if (job.budget.min) {
+    return `${currency} ${job.budget.min.toLocaleString()}`;
+  }
+
+  return "Budget shared after survey";
+}
 
 export default function MatchesPage() {
   const [sortBy, setSortBy] = useState<SortKey>("rating");
@@ -26,9 +120,31 @@ export default function MatchesPage() {
   const [certification, setCertification] = useState("All");
   const [maxDistance, setMaxDistance] = useState("All");
   const [query, setQuery] = useState("");
+  const { location } = useExperiencePreferences();
 
+  const matchUrl = useMemo(() => getMatchUrl(category, location), [category, location]);
+  const { data: rawMatchData, loading } = useQuery<LocationMatchResponse>(matchUrl, {
+    retry: false,
+    showErrorToast: false,
+  });
+  const matchData = rawMatchData && !Array.isArray(rawMatchData) ? rawMatchData : null;
+
+  const liveVendorCards = useMemo(
+    () => (matchData?.vendors || matchData?.engineers || []).map(toLiveVendorCard),
+    [matchData],
+  );
+
+  const demoVendorCards = useMemo(
+    () =>
+      demoVendors
+        .filter((vendor) => locationMatchesPlace(vendor.city, location.name))
+        .map(toDemoVendorCard),
+    [location.name],
+  );
+
+  const vendorCards = liveVendorCards.length ? liveVendorCards : demoVendorCards;
   const filteredVendors = useMemo(() => {
-    return vendors
+    return vendorCards
       .filter((vendor) => category === "All" || vendor.category === category)
       .filter((vendor) => certification === "All" || vendor.certifications.includes(certification))
       .filter((vendor) => maxDistance === "All" || vendor.distance <= Number(maxDistance))
@@ -41,25 +157,28 @@ export default function MatchesPage() {
         if (sortBy === "responseTime") return a.responseMinutes - b.responseMinutes;
         return b.rating - a.rating;
       })
-      .slice(0, 5);
-  }, [category, certification, maxDistance, query, sortBy]);
+      .slice(0, 6);
+  }, [category, certification, maxDistance, query, sortBy, vendorCards]);
 
-  const bestRating = Math.max(...vendors.map((vendor) => vendor.rating)).toFixed(1);
-  const fastestResponse = Math.min(...vendors.map((vendor) => vendor.responseMinutes));
+  const jobs = matchData?.jobs || [];
+  const customers = matchData?.customers || matchData?.clients || [];
+  const topRating = filteredVendors.length ? Math.max(...filteredVendors.map((vendor) => vendor.rating)).toFixed(1) : "0.0";
+  const locationLabel = matchData?.location.name || location.name;
 
   return (
     <WorkspaceShell
       title="Matched Vendors"
-      subtitle="Top vendors sorted by category fit, location radius, rating, response time, and delivery performance."
-      actions={<Link href="/post-requirement" className="rounded-md bg-primary-container px-3 py-2 text-xs font-bold text-on-primary">New Requirement</Link>}
+      subtitle={`Same-location matching for vendors, engineers, jobs, clients, and customers in ${locationLabel}.`}
+      actions={<Link href="/post-requirement" className="rounded-md bg-primary px-3 py-2 text-xs font-bold text-on-primary">New Requirement</Link>}
     >
-      <section className="grid gap-3 md:grid-cols-3">
-        <DataCard title="Top Matches" value={String(filteredVendors.length)} caption="Best vendors shown" icon={ShieldCheck} />
-        <DataCard title="Best Rating" value={bestRating} caption="Verified profile score" icon={Star} />
-        <DataCard title="Fastest Response" value={`${fastestResponse}m`} caption="Average first response" icon={Timer} />
+      <section className="grid gap-3 md:grid-cols-4">
+        <DataCard title="Vendors" value={String(matchData?.counts.vendors ?? filteredVendors.length)} caption="Same-location supply" icon={ShieldCheck} />
+        <DataCard title="Engineers" value={String(matchData?.counts.engineers ?? filteredVendors.length)} caption="Verified profiles" icon={Users} />
+        <DataCard title="Jobs" value={String(matchData?.counts.jobs ?? jobs.length)} caption="Client demand" icon={Briefcase} />
+        <DataCard title="Top Rating" value={topRating} caption={loading ? "Loading matches" : "Best match score"} icon={Star} />
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[240px_1fr]">
+      <section className="grid gap-4 xl:grid-cols-[240px_minmax(0,1fr)_340px]">
         <aside className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <ArrowUpDown className="h-4 w-4 text-primary" />
@@ -88,7 +207,7 @@ export default function MatchesPage() {
                 className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-semibold outline-none focus:border-primary"
               >
                 <option value="rating">Rating</option>
-                <option value="distance">Distance</option>
+                <option value="distance">Service radius</option>
                 <option value="responseTime">Response time</option>
               </select>
             </label>
@@ -124,16 +243,17 @@ export default function MatchesPage() {
             </label>
 
             <label className="block">
-              <span className="text-xs font-bold text-slate-600">Max distance</span>
+              <span className="text-xs font-bold text-slate-600">Max radius</span>
               <select
                 value={maxDistance}
                 onChange={(event) => setMaxDistance(event.target.value)}
                 className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-semibold outline-none focus:border-primary"
               >
-                <option value="All">All distances</option>
+                <option value="All">All radiuses</option>
                 <option value="10">Within 10 km</option>
                 <option value="15">Within 15 km</option>
                 <option value="25">Within 25 km</option>
+                <option value="100">Within 100 km</option>
               </select>
             </label>
 
@@ -155,7 +275,7 @@ export default function MatchesPage() {
 
         <div className="grid gap-3">
           {filteredVendors.map((vendor, index) => (
-            <article key={vendor.id} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+            <article key={`${vendor.source}-${vendor.id}`} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
               <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                 <div className="min-w-0">
                   <p className="text-[11px] font-bold uppercase tracking-wide text-primary">Rank #{index + 1}</p>
@@ -175,12 +295,12 @@ export default function MatchesPage() {
 
                 <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4">
                   <div className="rounded-md bg-slate-50 p-2">
-                    <p className="font-bold text-slate-950">{vendor.rating}</p>
+                    <p className="font-bold text-slate-950">{vendor.rating.toFixed(1)}</p>
                     <p className="text-slate-500">Rating</p>
                   </div>
                   <div className="rounded-md bg-slate-50 p-2">
-                    <p className="font-bold text-slate-950">{vendor.distance} km</p>
-                    <p className="text-slate-500">Distance</p>
+                    <p className="font-bold text-slate-950">{vendor.radius}</p>
+                    <p className="text-slate-500">Radius</p>
                   </div>
                   <div className="rounded-md bg-slate-50 p-2">
                     <p className="font-bold text-slate-950">{vendor.response}</p>
@@ -206,8 +326,8 @@ export default function MatchesPage() {
 
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link
-                  href={`/vendor/${vendor.id}`}
-                  className="rounded-md bg-primary-container px-3 py-2 text-xs font-bold text-on-primary shadow-sm transition hover:opacity-90"
+                  href={vendor.source === "live" ? `/engineers/${vendor.id}` : `/vendor/${vendor.id}`}
+                  className="rounded-md bg-primary px-3 py-2 text-xs font-bold text-on-primary shadow-sm transition hover:bg-primary-container"
                 >
                   View Profile
                 </Link>
@@ -224,11 +344,63 @@ export default function MatchesPage() {
 
           {filteredVendors.length === 0 ? (
             <div className="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center">
-              <p className="text-sm font-bold text-slate-950">No vendors match these filters</p>
-              <p className="mt-1 text-xs text-slate-500">Try expanding the distance, category, or certification filter.</p>
+              <p className="text-sm font-bold text-slate-950">No vendors match this location</p>
+              <p className="mt-1 text-xs text-slate-500">Try All India, a larger GPS radius, or a broader category.</p>
             </div>
           ) : null}
         </div>
+
+        <aside className="grid content-start gap-3">
+          <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-center gap-2">
+              <Briefcase className="h-4 w-4 text-primary" />
+              <h2 className="text-sm font-bold">Client jobs in {locationLabel}</h2>
+            </div>
+            <div className="mt-3 grid gap-2">
+              {jobs.slice(0, 4).map((job) => (
+                <Link key={job._id} href={`/jobs/${job._id}`} className="rounded-md border border-slate-200 bg-slate-50 p-3 transition hover:border-primary/30 hover:bg-primary-subtle">
+                  <p className="text-sm font-bold text-slate-950">{job.title}</p>
+                  <p className="mt-1 flex items-center gap-1 text-xs text-slate-500">
+                    <MapPin className="h-3 w-3" />
+                    {job.location.city}
+                  </p>
+                  <p className="mt-2 text-xs font-bold text-primary">{getJobBudget(job)}</p>
+                </Link>
+              ))}
+              {!jobs.length ? <p className="rounded-md border border-dashed border-slate-200 p-4 text-xs font-semibold text-slate-500">No live client jobs found for this location yet.</p> : null}
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-center gap-2">
+              <Building2 className="h-4 w-4 text-primary" />
+              <h2 className="text-sm font-bold">Clients and customers</h2>
+            </div>
+            <div className="mt-3 grid gap-2">
+              {customers.slice(0, 4).map((customer) => (
+                <article key={customer._id} className="rounded-md border border-slate-200 bg-slate-50 p-3">
+                  <p className="text-sm font-bold text-slate-950">{getCustomerName(customer)}</p>
+                  <p className="mt-1 text-xs text-slate-500">{customer.profile.fullName}</p>
+                </article>
+              ))}
+              {!customers.length ? <p className="rounded-md border border-dashed border-slate-200 p-4 text-xs font-semibold text-slate-500">Customer list appears when same-location jobs exist.</p> : null}
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-primary/15 bg-primary-container/10 p-4">
+            <div className="flex items-center gap-2">
+              <Timer className="h-4 w-4 text-primary" />
+              <h2 className="text-sm font-bold text-slate-950">Matching mode</h2>
+            </div>
+            <p className="mt-2 text-xs leading-5 text-slate-600">
+              {matchData?.signals.sameRadiusOnly
+                ? `GPS radius matching within ${matchData.location.radiusKm} km.`
+                : matchData?.signals.sameCityOnly
+                  ? "City and NCR cluster matching is active."
+                  : "All India marketplace matching is active."}
+            </p>
+          </section>
+        </aside>
       </section>
     </WorkspaceShell>
   );

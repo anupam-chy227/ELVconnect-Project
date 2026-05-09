@@ -60,14 +60,28 @@ export default function LoginPage() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(99,91,255,0.34),transparent_28rem),radial-gradient(circle_at_84%_12%,rgba(14,165,233,0.18),transparent_22rem),linear-gradient(135deg,#080b16_0%,#111827_48%,#1e1b4b_100%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-300/80 to-transparent" />
 
-      <div className="relative mx-auto grid min-h-screen w-full max-w-7xl items-center gap-8 px-4 py-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-6">
+      <div className="relative mx-auto grid min-h-screen w-full max-w-7xl items-center gap-8 px-4 py-8 lg:grid-cols-[0.95fr_1.05fr] lg:px-6">
+        <section className="flex items-center justify-center lg:justify-start">
+          <div className="w-full max-w-[480px]">
+            <div className="mb-6 text-center lg:hidden">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs font-black uppercase text-indigo-100">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Secure ELV access
+              </div>
+              <h1 className="mt-4 text-3xl font-black tracking-tight text-sky-50">ELV Connect</h1>
+              <p className="mt-2 text-sm text-indigo-100/80">Verified marketplace authentication</p>
+            </div>
+            <LoginForm />
+          </div>
+        </section>
+
         <section className="hidden min-h-[680px] flex-col justify-between rounded-md border border-white/10 bg-white/[0.055] p-8 shadow-2xl backdrop-blur-2xl lg:flex">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs font-black uppercase text-indigo-100">
               <Sparkles className="h-3.5 w-3.5 text-indigo-200" />
               ELV Connect enterprise access
             </div>
-            <h1 className="mt-7 max-w-xl text-5xl font-black leading-[1.04] tracking-tight">
+            <h1 className="mt-7 max-w-xl text-5xl font-black leading-[1.04] tracking-tight drop-shadow-[0_2px_18px_rgba(203,213,225,0.28)]" style={{ color: "#cbd5e1" }}>
               Secure infrastructure work starts with a verified login.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-7 text-indigo-100/82">
@@ -87,20 +101,6 @@ export default function LoginPage() {
                 </div>
               );
             })}
-          </div>
-        </section>
-
-        <section className="flex items-center justify-center">
-          <div className="w-full max-w-[480px]">
-            <div className="mb-6 text-center lg:hidden">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs font-black uppercase text-indigo-100">
-                <ShieldCheck className="h-3.5 w-3.5" />
-                Secure ELV access
-              </div>
-              <h1 className="mt-4 text-3xl font-black tracking-tight">ELV Connect</h1>
-              <p className="mt-2 text-sm text-indigo-100/80">Verified marketplace authentication</p>
-            </div>
-            <LoginForm />
           </div>
         </section>
       </div>

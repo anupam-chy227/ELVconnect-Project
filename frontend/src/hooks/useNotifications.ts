@@ -88,11 +88,11 @@ export function useNotifications() {
     refreshInterval: 60000,
     shouldRetryOnError: false,
   });
-  const jobsResult = useSWR<Job[]>(canPoll ? "notifications:/jobs/my-jobs" : null, jobsAPI.getMyJobs, {
+  const jobsResult = useSWR<Job[]>(canPoll ? "notifications:/jobs/my" : null, jobsAPI.getMyJobs, {
     refreshInterval: 60000,
     shouldRetryOnError: false,
   });
-  const invoicesResult = useSWR<Invoice[]>(canPoll ? "notifications:/invoices/my-invoices" : null, invoicesAPI.getMyInvoices, {
+  const invoicesResult = useSWR<Invoice[]>(canPoll ? "notifications:/invoices" : null, invoicesAPI.getMyInvoices, {
     refreshInterval: 60000,
     shouldRetryOnError: false,
   });

@@ -2,6 +2,9 @@ export type LanguageOption = {
   code: string;
   label: string;
   native: string;
+  short: string;
+  dir: "ltr" | "rtl";
+  translateCode: string;
 };
 
 export type LocationOption = {
@@ -13,28 +16,51 @@ export type LocationOption = {
 export const STORAGE_KEYS = {
   language: "elv-preferred-language",
   location: "elv-preferred-location",
+  locationLat: "elv-location-lat",
+  locationLng: "elv-location-lng",
   notifications: "elv-notifications-enabled",
 };
 
+export const LANGUAGE_CHANGE_EVENT = "elv-language-change";
+export const LOCATION_CHANGE_EVENT = "elv-location-change";
+
 export const LANGUAGES: LanguageOption[] = [
-  { code: "en-IN", label: "English", native: "English" },
-  { code: "hi-IN", label: "Hindi", native: "हिन्दी" },
-  { code: "bn-IN", label: "Bengali", native: "বাংলা" },
-  { code: "te-IN", label: "Telugu", native: "తెలుగు" },
-  { code: "mr-IN", label: "Marathi", native: "मराठी" },
-  { code: "ta-IN", label: "Tamil", native: "தமிழ்" },
-  { code: "ur-IN", label: "Urdu", native: "اردو" },
-  { code: "gu-IN", label: "Gujarati", native: "ગુજરાતી" },
-  { code: "kn-IN", label: "Kannada", native: "ಕನ್ನಡ" },
-  { code: "ml-IN", label: "Malayalam", native: "മലയാളം" },
-  { code: "or-IN", label: "Odia", native: "ଓଡ଼ିଆ" },
-  { code: "pa-IN", label: "Punjabi", native: "ਪੰਜਾਬੀ" },
-  { code: "as-IN", label: "Assamese", native: "অসমীয়া" },
-  { code: "mai-IN", label: "Maithili", native: "मैथिली" },
-  { code: "ks-IN", label: "Kashmiri", native: "कॉशुर" },
-  { code: "ne-IN", label: "Nepali", native: "नेपाली" },
-  { code: "sa-IN", label: "Sanskrit", native: "संस्कृतम्" },
+  { code: "en-IN", label: "English", native: "English", short: "EN", dir: "ltr", translateCode: "en" },
+  { code: "hi-IN", label: "Hindi", native: "\u0939\u093f\u0928\u094d\u0926\u0940", short: "HI", dir: "ltr", translateCode: "hi" },
+  { code: "bn-IN", label: "Bengali", native: "\u09ac\u09be\u0982\u09b2\u09be", short: "BN", dir: "ltr", translateCode: "bn" },
+  { code: "te-IN", label: "Telugu", native: "\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41", short: "TE", dir: "ltr", translateCode: "te" },
+  { code: "mr-IN", label: "Marathi", native: "\u092e\u0930\u093e\u0920\u0940", short: "MR", dir: "ltr", translateCode: "mr" },
+  { code: "ta-IN", label: "Tamil", native: "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd", short: "TA", dir: "ltr", translateCode: "ta" },
+  { code: "ur-IN", label: "Urdu", native: "\u0627\u0631\u062f\u0648", short: "UR", dir: "rtl", translateCode: "ur" },
+  { code: "gu-IN", label: "Gujarati", native: "\u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0", short: "GU", dir: "ltr", translateCode: "gu" },
+  { code: "kn-IN", label: "Kannada", native: "\u0c95\u0ca8\u0ccd\u0ca8\u0ca1", short: "KN", dir: "ltr", translateCode: "kn" },
+  { code: "ml-IN", label: "Malayalam", native: "\u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02", short: "ML", dir: "ltr", translateCode: "ml" },
+  { code: "pa-IN", label: "Punjabi", native: "\u0a2a\u0a70\u0a1c\u0a3e\u0a2c\u0a40", short: "PA", dir: "ltr", translateCode: "pa" },
 ];
+
+export function getLanguageByCode(code: string | null | undefined) {
+  return LANGUAGES.find((language) => language.code === code) || LANGUAGES[0];
+}
+
+export function getSavedLanguageCode() {
+  if (typeof window === "undefined") return LANGUAGES[0].code;
+  return getLanguageByCode(localStorage.getItem(STORAGE_KEYS.language)).code;
+}
+
+export function applyDocumentLanguage(code: string) {
+  if (typeof document === "undefined") return;
+  const language = getLanguageByCode(code);
+  document.documentElement.lang = language.code;
+  document.documentElement.dir = language.dir;
+}
+
+export function setPreferredLanguage(code: string) {
+  if (typeof window === "undefined") return;
+  const language = getLanguageByCode(code);
+  localStorage.setItem(STORAGE_KEYS.language, language.code);
+  applyDocumentLanguage(language.code);
+  window.dispatchEvent(new Event(LANGUAGE_CHANGE_EVENT));
+}
 
 export const INDIA_LOCATIONS: LocationOption[] = [
   { name: "All India", lat: 22.9734, lng: 78.6569 },
@@ -79,102 +105,143 @@ export const INDIA_LOCATIONS: LocationOption[] = [
 export const getLocationByName = (name: string) =>
   INDIA_LOCATIONS.find((location) => location.name === name) || INDIA_LOCATIONS[0];
 
-const translations = {
-  "hi-IN": {
-    hire: "हायर करें",
-    work: "काम खोजें",
-    getStarted: "शुरू करें",
-    badge: "राष्ट्रीय सुरक्षा इंफ्रास्ट्रक्चर",
-    headlinePrefix: "ELV इंजीनियरिंग के लिए",
-    headlineMain: "प्रोफेशनल इंटीग्रेशन हब",
-    subheadline:
-      "फायर सेफ्टी, CCTV और एक्सेस कंट्रोल विशेषज्ञों से तुरंत जुड़ें। राष्ट्रीय स्तर के प्रोजेक्ट के लिए भरोसेमंद टीम बनाएं।",
-    postJob: "जॉब पोस्ट करें",
-    findWork: "काम खोजें",
-    activity: "लाइव प्लेटफॉर्म गतिविधि",
-    core: "मुख्य सेवाएं",
-    coreSub: "पूरे Extra Low Voltage क्षेत्र में विशेषज्ञता।",
-  },
-  "bn-IN": {
-    hire: "নিয়োগ করুন",
-    work: "কাজ খুঁজুন",
-    getStarted: "শুরু করুন",
-    badge: "জাতীয় নিরাপত্তা অবকাঠামো",
-    headlinePrefix: "ELV Engineering এর জন্য",
-    headlineMain: "Professional Integration Hub",
-    subheadline:
-      "Fire Safety, CCTV এবং Access Control বিশেষজ্ঞদের সাথে দ্রুত সংযোগ করুন।",
-    postJob: "জব পোস্ট করুন",
-    findWork: "কাজ খুঁজুন",
-    activity: "লাইভ প্ল্যাটফর্ম কার্যকলাপ",
-    core: "মূল পরিষেবা",
-    coreSub: "Extra Low Voltage ক্ষেত্রে পূর্ণাঙ্গ দক্ষতা।",
-  },
-  "ta-IN": {
-    hire: "நிபுணரை நியமிக்கவும்",
-    work: "வேலை தேடுங்கள்",
-    getStarted: "தொடங்குங்கள்",
-    badge: "தேசிய பாதுகாப்பு உட்கட்டமைப்பு",
-    headlinePrefix: "ELV Engineering க்கான",
-    headlineMain: "Professional Integration Hub",
-    subheadline:
-      "Fire Safety, CCTV மற்றும் Access Control நிபுணர்களுடன் உடனடியாக இணைக.",
-    postJob: "வேலை பதிவிடுக",
-    findWork: "வேலை தேடுக",
-    activity: "நேரடி செயல்பாடு",
-    core: "முக்கிய சேவைகள்",
-    coreSub: "Extra Low Voltage துறைகளில் நிபுணத்துவம்.",
-  },
-  "te-IN": {
-    hire: "హైర్ చేయండి",
-    work: "పని కనుగొనండి",
-    getStarted: "ప్రారంభించండి",
-    badge: "జాతీయ భద్రతా మౌలిక వసతులు",
-    headlinePrefix: "ELV Engineering కోసం",
-    headlineMain: "Professional Integration Hub",
-    subheadline:
-      "Fire Safety, CCTV, Access Control నిపుణులతో వెంటనే కనెక్ట్ అవ్వండి.",
-    postJob: "జాబ్ పోస్ట్ చేయండి",
-    findWork: "పని కనుగొనండి",
-    activity: "లైవ్ ప్లాట్‌ఫార్మ్ క్రియాశీలత",
-    core: "ప్రధాన సేవలు",
-    coreSub: "Extra Low Voltage రంగంలో నైపుణ్యం.",
-  },
-  "mr-IN": {
-    hire: "हायर करा",
-    work: "काम शोधा",
-    getStarted: "सुरू करा",
-    badge: "राष्ट्रीय सुरक्षा पायाभूत सुविधा",
-    headlinePrefix: "ELV Engineering साठी",
-    headlineMain: "Professional Integration Hub",
-    subheadline:
-      "Fire Safety, CCTV आणि Access Control तज्ज्ञांशी त्वरित कनेक्ट व्हा.",
-    postJob: "जॉब पोस्ट करा",
-    findWork: "काम शोधा",
-    activity: "लाइव्ह प्लॅटफॉर्म अ‍ॅक्टिव्हिटी",
-    core: "मुख्य सेवा",
-    coreSub: "Extra Low Voltage क्षेत्रातील तज्ज्ञता.",
-  },
-} as const;
+export function getSavedLocationPreference() {
+  if (typeof window === "undefined") return INDIA_LOCATIONS[0];
 
-type TranslationKey = keyof (typeof translations)["hi-IN"];
+  const savedLocation = localStorage.getItem(STORAGE_KEYS.location) || "All India";
+  const savedLat = Number(localStorage.getItem(STORAGE_KEYS.locationLat));
+  const savedLng = Number(localStorage.getItem(STORAGE_KEYS.locationLng));
 
-export const translate = (languageCode: string, key: TranslationKey) => {
-  const english: Record<TranslationKey, string> = {
-    hire: "Hire",
-    work: "Work",
-    getStarted: "Get Started",
-    badge: "National Security Infrastructure",
-    headlinePrefix: "The Professional integration Hub for",
-    headlineMain: "ELV Engineerings",
-    subheadline:
-      "Connect instantly with vetted experts in Fire Safety, CCTV, and Access Control. Build reliable teams for national-scale infrastructure projects.",
-    postJob: "Post a Job",
-    findWork: "Find Work",
-    activity: "Live Platform Activity",
-    core: "Core Disciplines",
-    coreSub: "Expertise across the entire Extra Low Voltage spectrum.",
-  };
+  if (savedLocation === "Current Location" && Number.isFinite(savedLat) && Number.isFinite(savedLng)) {
+    return { name: "Current Location", lat: savedLat, lng: savedLng };
+  }
 
-  return translations[languageCode as keyof typeof translations]?.[key] || english[key];
+  return getLocationByName(savedLocation);
+}
+
+export function setPreferredLocation(location: LocationOption) {
+  if (typeof window === "undefined") return;
+
+  localStorage.setItem(STORAGE_KEYS.location, location.name);
+
+  if (Number.isFinite(location.lat) && Number.isFinite(location.lng)) {
+    localStorage.setItem(STORAGE_KEYS.locationLat, String(location.lat));
+    localStorage.setItem(STORAGE_KEYS.locationLng, String(location.lng));
+  } else {
+    localStorage.removeItem(STORAGE_KEYS.locationLat);
+    localStorage.removeItem(STORAGE_KEYS.locationLng);
+  }
+
+  window.dispatchEvent(new Event(LOCATION_CHANGE_EVENT));
+}
+
+export const LOCATION_SEARCH_KEYS = ["city", "lat", "lng", "radius"] as const;
+
+const LOCATION_ALIASES: Record<string, string[]> = {
+  "Delhi NCR": ["Delhi NCR", "Delhi", "New Delhi", "Gurugram", "Gurgaon", "Noida", "Faridabad", "Ghaziabad", "Manesar"],
+  Maharashtra: ["Maharashtra", "Mumbai", "Pune", "Navi Mumbai", "Thane", "Nagpur", "Chakan"],
+  Karnataka: ["Karnataka", "Bengaluru", "Bangalore", "Mysuru"],
+  Telangana: ["Telangana", "Hyderabad", "Secunderabad"],
+  Gujarat: ["Gujarat", "Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+  "Tamil Nadu": ["Tamil Nadu", "Chennai", "Coimbatore", "Madurai"],
+  "West Bengal": ["West Bengal", "Kolkata", "Howrah"],
 };
+
+export function getLocationAliases(locationName: string) {
+  return LOCATION_ALIASES[locationName] || [locationName];
+}
+
+export function isAllIndiaLocation(location: Pick<LocationOption, "name">) {
+  return location.name === "All India";
+}
+
+export function getLocationSearchParams(location: LocationOption, radiusKm = 100) {
+  const params = new URLSearchParams();
+
+  if (isAllIndiaLocation(location)) {
+    return params;
+  }
+
+  if (location.name === "Current Location" && Number.isFinite(location.lat) && Number.isFinite(location.lng)) {
+    params.set("lat", String(location.lat));
+    params.set("lng", String(location.lng));
+    params.set("radius", String(radiusKm));
+    return params;
+  }
+
+  params.set("city", location.name);
+  return params;
+}
+
+export function appendLocationSearchParams(baseUrl: string, location: LocationOption, radiusKm = 100) {
+  const params = getLocationSearchParams(location, radiusKm);
+  const query = params.toString();
+
+  if (!query) {
+    return baseUrl;
+  }
+
+  return `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}${query}`;
+}
+
+export function mergeLocationSearchParams(search: string | URLSearchParams, location: LocationOption, radiusKm = 100) {
+  const params = new URLSearchParams(search);
+
+  LOCATION_SEARCH_KEYS.forEach((key) => params.delete(key));
+  getLocationSearchParams(location, radiusKm).forEach((value, key) => params.set(key, value));
+
+  return params;
+}
+
+export function syncLocationToCurrentPath(location: LocationOption) {
+  if (typeof window === "undefined" || !shouldSyncLocationToPath(window.location.pathname)) {
+    return;
+  }
+
+  const params = mergeLocationSearchParams(window.location.search, location);
+  const query = params.toString();
+  const nextUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+  window.history.replaceState(null, "", nextUrl);
+}
+
+export function shouldSyncLocationToPath(pathname: string) {
+  return (
+    pathname === "/jobs" ||
+    pathname === "/engineers" ||
+    pathname === "/matches" ||
+    pathname === "/city-directory" ||
+    pathname.startsWith("/categories/")
+  );
+}
+
+export function locationMatchesPlace(place: string | undefined, locationName: string) {
+  if (!place || locationName === "All India" || locationName === "Current Location") {
+    return true;
+  }
+
+  const normalizedPlace = place.toLowerCase();
+  return getLocationAliases(locationName).some((alias) => {
+    const normalizedAlias = alias.toLowerCase();
+    return normalizedPlace.includes(normalizedAlias) || normalizedAlias.includes(normalizedPlace);
+  });
+}
+
+const english = {
+  hire: "Hire",
+  work: "Work",
+  getStarted: "Get Started",
+  badge: "National Security Infrastructure",
+  headlinePrefix: "The Professional integration Hub for",
+  headlineMain: "ELV Engineerings",
+  subheadline:
+    "Connect instantly with vetted experts in Fire Safety, CCTV, and Access Control. Build reliable teams for national-scale infrastructure projects.",
+  postJob: "Post a Job",
+  findWork: "Find Work",
+  activity: "Live Platform Activity",
+  core: "Core Disciplines",
+  coreSub: "Expertise across the entire Extra Low Voltage spectrum.",
+};
+
+type TranslationKey = keyof typeof english;
+
+export const translate = (_languageCode: string, key: TranslationKey) => english[key];

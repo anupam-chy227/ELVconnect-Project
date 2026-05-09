@@ -1,21 +1,32 @@
 "use client";
 
 import dynamic from "next/dynamic";
-
-const BusinessReviewSpotlight = dynamic(
-  () => import("@/components/widgets/BusinessReviewSpotlight").then((module) => module.BusinessReviewSpotlight),
-  { ssr: false },
-);
+import { usePathname } from "next/navigation";
 
 const FloatingLiveStatsWidget = dynamic(() => import("@/components/FloatingLiveStatsWidget"), {
   ssr: false,
 });
 
-export function LaunchDynamicWidgets() {
+const HIDDEN_LIVE_WIDGET_ROUTES = new Set(["/login", "/register"]);
+
+function shouldHideLiveWidget(pathname: string | null) {
+  if (!pathname) {
+    return false;
+  }
+
   return (
-    <>
-      <BusinessReviewSpotlight />
-      <FloatingLiveStatsWidget />
-    </>
+    HIDDEN_LIVE_WIDGET_ROUTES.has(pathname) ||
+    pathname.startsWith("/register/") ||
+    pathname.startsWith("/auth/")
   );
+}
+
+export function LaunchDynamicWidgets() {
+  const pathname = usePathname();
+
+  if (shouldHideLiveWidget(pathname)) {
+    return null;
+  }
+
+  return <FloatingLiveStatsWidget />;
 }

@@ -145,7 +145,7 @@ export function CommandPalette({
 
                   const className = cn(
                     "flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-foreground transition dark:text-white",
-                    active && "bg-primary text-on-primary dark:bg-elv-iris dark:text-white",
+                    active && "bg-primary text-on-primary dark:bg-primary dark:text-on-primary",
                     !active && "hover:bg-primary-subtle dark:hover:bg-elv-dark-3",
                   );
 

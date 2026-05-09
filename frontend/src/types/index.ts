@@ -320,6 +320,36 @@ export interface PaginatedResponse<T> {
     page: number;
     limit: number;
     total: number;
-    pages: number;
+    pages?: number;
+    totalPages?: number;
+  };
+}
+
+export interface LocationMatchResponse {
+  location: {
+    name: string;
+    city?: string;
+    lat?: number;
+    lng?: number;
+    radiusKm: number;
+    mode: "all" | "city" | "geo";
+  };
+  engineers: User[];
+  vendors: User[];
+  jobs: Job[];
+  clients: User[];
+  customers: User[];
+  counts: {
+    engineers: number;
+    vendors: number;
+    jobs: number;
+    clients: number;
+    customers: number;
+  };
+  signals: {
+    locationMode: "all" | "city" | "geo";
+    sameCityOnly: boolean;
+    sameRadiusOnly: boolean;
+    category: string | null;
   };
 }

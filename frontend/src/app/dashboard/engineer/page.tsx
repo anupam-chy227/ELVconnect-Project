@@ -18,6 +18,7 @@ import {
 import { jobsAPI } from "@/lib/api";
 import { toast } from "@/lib/toast";
 import { Badge, Button, Card, ErrorCard, Input, Modal, Select, SkeletonCard, Textarea, VerificationBadge } from "@/components/ui";
+import { GstinReminderBanner } from "@/components/Vendor/GstinReminderBanner";
 import { cn } from "@/components/ui/utils";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useJobsBoard, useJobsNearMe, useMyApplications, useMyInvoices, useMyJobs, useMyProfile } from "@/hooks/useSWRData";
@@ -447,6 +448,8 @@ export default function EngineerDashboardPage() {
   return (
     <main className="premium-shell min-h-screen px-4 py-6 text-foreground">
       <div className="mx-auto grid max-w-7xl gap-6">
+        <GstinReminderBanner gstNumber={profile.serviceProvider?.gstNumber} shouldShow={true} />
+
         <VerificationBanner
           status={profile.serviceProvider?.verificationStatus}
           onNavigate={() => router.push("/dashboard/engineer/verification")}

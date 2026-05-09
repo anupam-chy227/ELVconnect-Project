@@ -37,14 +37,14 @@ export default function ApplicationsPage() {
             {isServiceProvider ? (
               <Link
                 href="/jobs"
-                className="inline-block px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                className="inline-block rounded-lg bg-primary px-6 py-2 text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
               >
                 Browse Jobs
               </Link>
             ) : (
               <Link
                 href="/dashboard/jobs/create"
-                className="inline-block px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                className="inline-block rounded-lg bg-primary px-6 py-2 text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
               >
                 Post a Job
               </Link>

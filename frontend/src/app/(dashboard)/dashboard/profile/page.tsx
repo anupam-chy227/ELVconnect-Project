@@ -158,7 +158,7 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                  className="inline-flex items-center gap-2 rounded-lg border border-primary/25 bg-white px-4 py-2 text-sm font-semibold text-primary hover:border-primary/45 hover:bg-primary-subtle"
                 >
                   <Upload className="h-4 w-4" />
                   Upload image
@@ -167,7 +167,7 @@ export default function ProfilePage() {
                   <button
                     type="button"
                     onClick={beginEditing}
-                    className="rounded-lg bg-purple-600 px-5 py-2 text-sm font-semibold text-white hover:bg-purple-700"
+                    className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container"
                   >
                     Edit Profile
                   </button>
@@ -252,13 +252,13 @@ export default function ProfilePage() {
                   value={formData.profile.bio}
                   onChange={handleChange}
                   placeholder="Tell clients about your company, projects, service areas, and ELV expertise."
-                  className="min-h-28 w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-100"
+                  className="min-h-28 w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
                 />
               ) : (
                 <button
                   type="button"
                   onClick={beginEditing}
-                  className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-left text-gray-900 hover:border-purple-300"
+                  className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-left text-gray-900 hover:border-primary/35"
                 >
                   {formData.profile.bio || "No bio set"}
                 </button>
@@ -286,7 +286,7 @@ export default function ProfilePage() {
                   <button
                     type="submit"
                     disabled={updateProfileMutation.loading}
-                    className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-3 font-semibold text-white hover:bg-purple-700 disabled:bg-gray-400"
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container disabled:bg-gray-400"
                   >
                     <Save className="h-4 w-4" />
                     {updateProfileMutation.loading ? "Saving..." : "Save Changes"}
@@ -297,7 +297,7 @@ export default function ProfilePage() {
                       setDraftForm(initialForm);
                       setIsEditing(false);
                     }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-6 py-3 font-semibold text-gray-900 hover:bg-gray-300"
+                    className="inline-flex items-center gap-2 rounded-lg border border-primary/25 bg-white px-6 py-3 font-semibold text-primary hover:border-primary/45 hover:bg-primary-subtle"
                   >
                     <X className="h-4 w-4" />
                     Cancel
@@ -307,7 +307,7 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={beginEditing}
-                  className="rounded-lg bg-purple-600 px-6 py-3 font-semibold text-white hover:bg-purple-700"
+                  className="rounded-lg bg-primary px-6 py-3 font-semibold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container"
                 >
                   Edit Profile
                 </button>
@@ -342,7 +342,7 @@ function ProfileField({
   return (
     <div>
       <label className="mb-2 block text-sm font-medium text-gray-700">{label}</label>
-      <div className="flex items-center gap-3 rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 focus-within:border-purple-600 focus-within:bg-white focus-within:ring-2 focus-within:ring-purple-100">
+    <div className="flex items-center gap-3 rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 focus-within:border-primary/45 focus-within:bg-white focus-within:ring-4 focus-within:ring-primary-ring">
         {icon}
         {editing ? (
           <input

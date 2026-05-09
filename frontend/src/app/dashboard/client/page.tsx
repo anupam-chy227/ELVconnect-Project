@@ -1,11 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
   Banknote,
-  Bell,
   BriefcaseBusiness,
   CalendarCheck2,
   CalendarDays,
@@ -36,11 +35,14 @@ import {
   WalletCards,
   type LucideIcon,
 } from "lucide-react";
+import HeaderExperienceControls from "@/components/HeaderExperienceControls";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { RevenueAreaChart, type RevenuePoint } from "@/components/charts/DashboardCharts";
 import { Button, Card, PaymentTrustCard, VerificationBadge } from "@/components/ui";
 import { cn, progressWidthClass } from "@/components/ui/utils";
 import { useAuth } from "@/hooks/useAuth";
+import { useExperiencePreferences } from "@/hooks/useExperiencePreferences";
+import { locationMatchesPlace } from "@/lib/experience-preferences";
 
 type StatTone = "blue" | "purple" | "orange" | "green";
 type ProjectStatus = "Planning" | "Survey Done" | "In Progress" | "QA" | "Completed";
@@ -784,7 +786,7 @@ function ActiveProjectsTable({
   );
 }
 
-function FollowUpActionsCard() {
+function FollowUpActionsCard({ actions }: { actions: FollowUpAction[] }) {
   const toneClass = {
     primary: "border-primary/20 bg-primary-subtle text-primary",
     warning: "border-amber-200 bg-amber-50 text-amber-700",
@@ -798,30 +800,34 @@ function FollowUpActionsCard() {
           <p className="text-xs font-black uppercase tracking-[0.16em] text-primary">Next best actions</p>
           <h2 className="mt-1 text-lg font-black text-foreground">Follow-Up Queue</h2>
         </div>
-        <Link href="/post-requirement" className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-2 text-xs font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring">
+        <Link href="/post-requirement" className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 text-xs font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:bg-primary-container focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring">
           <Plus className="h-4 w-4" aria-hidden="true" />
           Post Job
         </Link>
       </div>
       <div className="mt-5 grid gap-3">
-        {followUpActions.map((action) => (
-          <Link
-            key={action.title}
-            href={action.href}
-            className="group rounded-md border border-border-subtle bg-surface p-3 shadow-sm transition hover:border-primary/30 hover:bg-primary-subtle/40 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <span className={cn("rounded-full border px-2.5 py-1 text-[11px] font-black", toneClass[action.tone])}>{action.due}</span>
-              <ChevronRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
-            </div>
-            <p className="mt-3 text-sm font-black text-foreground">{action.title}</p>
-            <p className="mt-1 text-xs leading-5 text-muted-foreground">{action.detail}</p>
-            <p className="mt-3 flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground">
-              <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              {action.site}, {action.city}
-            </p>
-          </Link>
-        ))}
+        {actions.length ? (
+          actions.map((action) => (
+            <Link
+              key={action.title}
+              href={action.href}
+              className="group rounded-md border border-border-subtle bg-surface p-3 shadow-sm transition hover:border-primary/30 hover:bg-primary-subtle/40 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <span className={cn("rounded-full border px-2.5 py-1 text-[11px] font-black", toneClass[action.tone])}>{action.due}</span>
+                <ChevronRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+              </div>
+              <p className="mt-3 text-sm font-black text-foreground">{action.title}</p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">{action.detail}</p>
+              <p className="mt-3 flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground">
+                <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                {action.site}, {action.city}
+              </p>
+            </Link>
+          ))
+        ) : (
+          <p className="rounded-md border border-dashed border-border-subtle bg-surface p-4 text-xs font-bold text-muted-foreground">No follow-ups for the selected location.</p>
+        )}
       </div>
     </Card>
   );
@@ -901,7 +907,7 @@ function SpendChartCard() {
   );
 }
 
-function RecommendedEngineersCard() {
+function RecommendedEngineersCard({ engineers }: { engineers: Engineer[] }) {
   return (
     <Card variant="glass" className="p-5">
       <div className="flex items-start justify-between gap-4">
@@ -916,7 +922,7 @@ function RecommendedEngineersCard() {
         </Link>
       </div>
       <div className="mt-5 grid gap-3">
-        {recommendedEngineers.map((engineer) => (
+        {engineers.length ? engineers.map((engineer) => (
           <article key={engineer.name} className="rounded-md border border-border-subtle bg-surface p-3 shadow-sm">
             <div className="flex items-start gap-3">
               <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-secondary text-sm font-black text-on-primary shadow-md">{engineer.initials}</span>
@@ -948,13 +954,13 @@ function RecommendedEngineersCard() {
               </Link>
             </div>
           </article>
-        ))}
+        )) : <p className="rounded-md border border-dashed border-border-subtle bg-surface p-4 text-xs font-bold text-muted-foreground">No recommended engineers for the selected location.</p>}
       </div>
     </Card>
   );
 }
 
-function RecentActivityCard() {
+function RecentActivityCard({ events }: { events: ActivityEvent[] }) {
   const activityTone = {
     primary: "bg-primary",
     success: "bg-success",
@@ -971,7 +977,7 @@ function RecentActivityCard() {
         <Clock3 className="h-5 w-5 text-primary" aria-hidden="true" />
       </div>
       <ol className="mt-5 space-y-3" aria-label="Recent client dashboard activity">
-        {activityFeed.map((event) => (
+        {events.length ? events.map((event) => (
           <li key={`${event.title}-${event.timestamp}`} className="flex gap-3 rounded-md border border-border-subtle bg-surface p-3">
             <span className={cn("mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full", activityTone[event.tone])} />
             <span className="min-w-0">
@@ -983,13 +989,13 @@ function RecentActivityCard() {
               </span>
             </span>
           </li>
-        ))}
+        )) : <li className="rounded-md border border-dashed border-border-subtle bg-surface p-4 text-xs font-bold text-muted-foreground">No recent activity for the selected location.</li>}
       </ol>
     </Card>
   );
 }
 
-function DocumentVaultCard() {
+function DocumentVaultCard({ items }: { items: VaultItem[] }) {
   const statusClass = {
     Ready: "border-emerald-200 bg-emerald-50 text-emerald-700",
     "Needs review": "border-amber-200 bg-amber-50 text-amber-700",
@@ -1009,7 +1015,7 @@ function DocumentVaultCard() {
         </Link>
       </div>
       <div className="mt-5 grid gap-3">
-        {vaultItems.map((item) => (
+        {items.length ? items.map((item) => (
           <article key={`${item.title}-${item.project}`} className="rounded-md border border-border-subtle bg-surface p-3 shadow-sm">
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -1028,13 +1034,13 @@ function DocumentVaultCard() {
               <span>{item.updated}</span>
             </div>
           </article>
-        ))}
+        )) : <p className="rounded-md border border-dashed border-border-subtle bg-surface p-4 text-xs font-bold text-muted-foreground">No documents for the selected location.</p>}
       </div>
     </Card>
   );
 }
 
-function SurveyCalendar() {
+function SurveyCalendar({ week }: { week: SurveyDay[] }) {
   return (
     <Card variant="glass" className="p-5">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -1049,7 +1055,7 @@ function SurveyCalendar() {
         </span>
       </div>
       <div className="mt-5 grid gap-3 md:grid-cols-7">
-        {surveyWeek.map((day) => (
+        {week.map((day) => (
           <section key={day.day} className="min-h-[166px] rounded-md border border-border-subtle bg-surface-muted p-3" aria-label={`${day.day} ${day.date}`}>
             <div className="flex items-center justify-between">
               <p className="text-xs font-black uppercase text-muted-foreground">{day.day}</p>
@@ -1105,10 +1111,18 @@ function CategoryIconStrip() {
 function LiveOpsHeader({
   firstName,
   dateLabel,
+  locationName,
 }: {
   firstName: string;
   dateLabel: string;
+  locationName: string;
 }) {
+  const clusterLabel = locationName === "All India" ? "All India operating cluster" : `${locationName} operating cluster`;
+  const portfolioLabel =
+    locationName === "All India"
+      ? "Portfolio health across all active ELV sites."
+      : `Portfolio health across ${locationName} matched sites.`;
+
   return (
     <header className="sticky top-0 z-30 border-b border-white/60 bg-white/84 px-4 py-4 shadow-sm backdrop-blur-2xl sm:px-6 lg:px-8 dark:border-elv-dark-border dark:bg-elv-dark-1/88">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
@@ -1116,34 +1130,19 @@ function LiveOpsHeader({
           <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-primary">
             <span>{dateLabel}</span>
             <span className="h-1 w-1 rounded-full bg-primary" aria-hidden="true" />
-            <span>Delhi NCR operating cluster</span>
+            <span>{clusterLabel}</span>
           </div>
           <h1 className="mt-2 truncate text-2xl font-black tracking-tight text-foreground sm:text-3xl">
             Good morning, {firstName}
           </h1>
-          <p className="mt-1 text-sm font-semibold text-muted-foreground">Portfolio health across Manesar, Delhi NCR, Noida, Gurugram, and Pune sites.</p>
+          <p className="mt-1 text-sm font-semibold text-muted-foreground">{portfolioLabel}</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <CategoryIconStrip />
-          <button
-            type="button"
-            className="inline-flex min-h-11 items-center gap-2 rounded-md border border-border-subtle bg-surface px-3 text-sm font-black text-foreground shadow-sm transition hover:border-primary/30 hover:bg-primary-subtle focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
-            aria-label="Change operating city"
-          >
-            <MapPin className="h-4 w-4 text-primary" aria-hidden="true" />
-            Delhi NCR
-          </button>
-          <button
-            type="button"
-            className="relative grid h-11 w-11 place-items-center rounded-md border border-border-subtle bg-surface text-muted-foreground shadow-sm transition hover:border-primary/30 hover:text-foreground focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
-            aria-label="Open notifications"
-          >
-            <Bell className="h-4 w-4" aria-hidden="true" />
-            <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-danger" />
-          </button>
+          <HeaderExperienceControls />
           <Link
             href="/post-requirement"
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-4 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:shadow-floating focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:bg-primary-container hover:shadow-floating focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
           >
             <Plus className="h-4 w-4" aria-hidden="true" />
             Post Job
@@ -1193,30 +1192,63 @@ function TrustOverviewBand() {
 
 function ClientDashboardContent() {
   const { user } = useAuth();
+  const { location } = useExperiencePreferences();
   const dateLabel = "Today";
   const [projectQuery, setProjectQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const firstName = user?.profile.fullName?.split(" ")[0] || "Rajesh";
+  const locationName = location.name;
+
+  const matchesSelectedLocation = useCallback(
+    (values: Array<string | undefined>) => values.some((value) => locationMatchesPlace(value, locationName)),
+    [locationName],
+  );
 
   const filteredProjects = useMemo(() => {
     const query = projectQuery.trim().toLowerCase();
 
     return projects.filter((project) => {
+      const matchesLocation = matchesSelectedLocation([project.city, project.area, project.site]);
       const matchesStatus = statusFilter === "All" || project.status === statusFilter;
       const matchesQuery =
         !query ||
         [project.name, project.category, project.city, project.area, project.site, project.engineer, project.id].some((value) => value.toLowerCase().includes(query));
 
-      return matchesStatus && matchesQuery;
+      return matchesLocation && matchesStatus && matchesQuery;
     });
-  }, [projectQuery, statusFilter]);
+  }, [matchesSelectedLocation, projectQuery, statusFilter]);
+
+  const filteredFollowUps = useMemo(
+    () => followUpActions.filter((action) => matchesSelectedLocation([action.city, action.site])),
+    [matchesSelectedLocation],
+  );
+  const filteredEngineers = useMemo(
+    () => recommendedEngineers.filter((engineer) => matchesSelectedLocation([engineer.city, engineer.area])),
+    [matchesSelectedLocation],
+  );
+  const filteredActivity = useMemo(
+    () => activityFeed.filter((event) => matchesSelectedLocation([event.city, event.site])),
+    [matchesSelectedLocation],
+  );
+  const filteredVaultItems = useMemo(
+    () => vaultItems.filter((item) => matchesSelectedLocation([item.city, item.site, item.project])),
+    [matchesSelectedLocation],
+  );
+  const filteredSurveyWeek = useMemo(
+    () =>
+      surveyWeek.map((day) => ({
+        ...day,
+        surveys: day.surveys.filter((survey) => matchesSelectedLocation([survey.city, survey.area, survey.site, survey.project])),
+      })),
+    [matchesSelectedLocation],
+  );
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8f9ff_0%,#ffffff_42%,#f3f0ff_100%)] text-foreground dark:bg-[linear-gradient(180deg,#0d0d1a_0%,#13132b_50%,#1c1c3a_100%)]">
       <div className="flex">
         <DashboardSidebar />
         <main className="min-w-0 flex-1">
-          <LiveOpsHeader firstName={firstName} dateLabel={dateLabel} />
+          <LiveOpsHeader firstName={firstName} dateLabel={dateLabel} locationName={locationName} />
 
           <div className="space-y-6 px-4 py-6 sm:px-6 lg:px-8">
             <TrustOverviewBand />
@@ -1235,7 +1267,7 @@ function ClientDashboardContent() {
                 onQueryChange={setProjectQuery}
                 onStatusChange={setStatusFilter}
               />
-              <FollowUpActionsCard />
+              <FollowUpActionsCard actions={filteredFollowUps} />
             </section>
 
             <section className="grid gap-6 xl:grid-cols-3">
@@ -1245,14 +1277,14 @@ function ClientDashboardContent() {
 
             <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.72fr)]">
               <PaymentTrustCard amount={formatCurrency(paymentSummary.pendingRelease)} method="upi" status="UPI release remains gated by milestone approval." />
-              <RecommendedEngineersCard />
+              <RecommendedEngineersCard engineers={filteredEngineers} />
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.72fr)]">
-              <SurveyCalendar />
+              <SurveyCalendar week={filteredSurveyWeek} />
               <div className="grid gap-6">
-                <DocumentVaultCard />
-                <RecentActivityCard />
+                <DocumentVaultCard items={filteredVaultItems} />
+                <RecentActivityCard events={filteredActivity} />
               </div>
             </section>
 

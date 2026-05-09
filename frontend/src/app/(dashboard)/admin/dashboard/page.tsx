@@ -357,7 +357,7 @@ export default function AdminDashboardPage() {
                 <Link
                   key={module.title}
                   href={module.href}
-                  className="group rounded-md border border-slate-200 bg-white/80 p-4 shadow-sm transition hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-indigo-800"
+                  className="group rounded-md border border-slate-200 bg-white/80 p-4 shadow-sm transition hover:-translate-y-1 hover:border-primary/35 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-primary/45"
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
@@ -606,7 +606,7 @@ export default function AdminDashboardPage() {
                     6 PM settlement window.
                   </p>
                 </div>
-                <button className="inline-flex items-center justify-center gap-2 rounded-md bg-slate-950 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-slate-950/15 transition hover:-translate-y-0.5 hover:bg-indigo-700 active:translate-y-0 dark:bg-white dark:text-slate-950">
+                <button className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-bold text-on-primary shadow-lg shadow-primary/20 transition hover:-translate-y-0.5 hover:bg-primary-container active:translate-y-0">
                   Review queue
                   <ArrowUpRight className="h-4 w-4" />
                 </button>

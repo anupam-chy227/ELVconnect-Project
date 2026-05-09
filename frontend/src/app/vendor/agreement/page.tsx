@@ -718,7 +718,7 @@ export default function VendorAgreementPage() {
                     className={cn(
                       "flex min-h-12 items-center gap-2 rounded-md px-3 py-2 text-left text-xs font-black transition focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring",
                       isActive
-                        ? "bg-gradient-to-b from-primary to-primary-container text-on-primary shadow-glow"
+                        ? "bg-primary text-on-primary shadow-glow"
                         : "text-muted-foreground hover:bg-primary-subtle hover:text-primary",
                     )}
                     aria-current={isActive ? "step" : undefined}

@@ -185,7 +185,7 @@ export function JobCard({ job, showStatus = true }: JobCardProps) {
         <div className="mt-4 flex gap-2">
           <Link
             href={`/jobs/${job._id}`}
-            className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-2 text-xs font-black text-on-primary shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-black text-on-primary shadow-sm shadow-primary/20 transition hover:-translate-y-0.5 hover:bg-primary-container hover:shadow-md"
           >
             View project
             <ArrowUpRight className="h-3.5 w-3.5" />

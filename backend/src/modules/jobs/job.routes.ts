@@ -16,11 +16,12 @@ const router = Router();
 // GET /api/v1/jobs
 router.get('/', validate(jobQuerySchema), jobController.listJobs);
 
-// GET /api/v1/jobs/:id
 router.get('/my', requireAuth, roleGuard('customer', 'admin'), jobController.myJobs);
+router.get('/my-jobs', requireAuth, roleGuard('customer', 'admin'), jobController.myJobs);
 
 router.get('/nearby', requireAuth, roleGuard('service_provider'), jobController.nearbyJobs);
 
+// GET /api/v1/jobs/:id
 router.get('/:id', jobController.getJob);
 
 // Authenticated routes below

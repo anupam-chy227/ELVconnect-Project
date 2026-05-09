@@ -16,6 +16,7 @@ import { JobCard } from "@/components/Jobs/JobCard";
 import { PaymentTrustCard, VerificationBadge } from "@/components/ui";
 import { useQuery } from "@/hooks/useQuery";
 import { useExperiencePreferences } from "@/hooks/useExperiencePreferences";
+import { appendLocationSearchParams } from "@/lib/experience-preferences";
 import { ELVCategory, Job, PaginatedResponse } from "@/types";
 
 const categories = [
@@ -111,19 +112,15 @@ export default function JobsPage() {
   const [selectedDummyJob, setSelectedDummyJob] = useState(recentJobs[0]);
   const { location } = useExperiencePreferences();
 
-  const locationParams =
-    location.name === "All India"
-      ? ""
-      : location.name === "Current Location" && location.lat && location.lng
-        ? `&lat=${location.lat}&lng=${location.lng}&radius=100`
-        : `&city=${encodeURIComponent(location.name)}`;
-
   const { data, loading } = useQuery<PaginatedResponse<Job>>(
-    `/jobs?status=${statusFilter}${selectedCategory ? `&category=${selectedCategory}` : ""}${locationParams}`,
+    appendLocationSearchParams(
+      `/jobs?status=${statusFilter}${selectedCategory ? `&category=${selectedCategory}` : ""}`,
+      location,
+    ),
     { enabled: !!statusFilter, retry: false, showErrorToast: false }
   );
 
-  const jobs = data?.data || [];
+  const jobs = Array.isArray(data) ? data : data?.data || [];
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
@@ -211,7 +208,7 @@ export default function JobsPage() {
             </label>
             <Link
               href="/dashboard/jobs/create"
-              className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-2 text-xs font-bold text-on-primary shadow-sm"
+              className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-bold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container"
             >
               <Send className="h-3.5 w-3.5" />
               Post detailed job

@@ -3,7 +3,17 @@
 import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { apiClient } from "@/lib/api";
+import { decodeJwtPayload } from "@/lib/auth";
 import { markDashboardNavigationIntent } from "@/components/Dashboard/DashboardLandingGuard";
+
+function getDashboardPath(token: string) {
+  const role = decodeJwtPayload(token)?.role;
+
+  if (role === "admin") return "/dashboard/admin";
+  if (role === "service_provider") return "/dashboard/engineer";
+  if (role === "customer") return "/dashboard/customer";
+  return "/dashboard";
+}
 
 function GoogleCallbackContent() {
   const router = useRouter();
@@ -14,7 +24,7 @@ function GoogleCallbackContent() {
     if (accessToken) {
       apiClient.setAccessToken(accessToken);
       markDashboardNavigationIntent();
-      router.replace("/dashboard");
+      router.replace(getDashboardPath(accessToken));
       return;
     }
 

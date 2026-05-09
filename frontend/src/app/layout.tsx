@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import PublicFooter from "@/components/PublicFooter";
 import { LaunchDynamicWidgets } from "@/components/LaunchDynamicWidgets";
 import { MotionProvider } from "@/components/MotionProvider";
+import TranslationProvider from "@/components/TranslationProvider";
 
 export default function RootLayout({
   children,
@@ -16,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -36,11 +37,13 @@ export default function RootLayout({
               <ThemeProvider>
                 <ToastProvider>
                   <AuthProvider>
-                    <Navbar />
-                    {children}
-                    <PublicFooter />
-                    <LaunchDynamicWidgets />
-                    <ToastContainer />
+                    <TranslationProvider>
+                      <Navbar />
+                      {children}
+                      <PublicFooter />
+                      <LaunchDynamicWidgets />
+                      <ToastContainer />
+                    </TranslationProvider>
                   </AuthProvider>
                 </ToastProvider>
               </ThemeProvider>

@@ -19,6 +19,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { DataCard, StatusPill, WorkspaceShell } from "@/components/ELVConnect/WorkspaceShell";
+import { GstinReminderBanner } from "@/components/Vendor/GstinReminderBanner";
 import { Card, PaymentTrustCard, VerificationBadge } from "@/components/ui";
 import { projects } from "@/lib/elv-demo-data";
 
@@ -96,6 +97,7 @@ export default function VendorDashboardPage() {
     <WorkspaceShell
       title="Vendor Dashboard"
       subtitle="Manage new leads, site visits, quotes, ongoing work, milestone updates, and AMC opportunities."
+      notice={<GstinReminderBanner />}
       actions={
         <div className="flex flex-wrap items-center gap-2">
           <Link href="/vendor/agreement" className="inline-flex items-center gap-1.5 rounded-md bg-primary-container px-3 py-2 text-xs font-bold text-on-primary shadow-sm">

@@ -16,11 +16,9 @@ import {
   CreditCard,
   FileText,
   LogOut,
-  Moon,
   Search,
   Settings,
   Sparkles,
-  Sun,
   UserRound,
   UsersRound,
   X,
@@ -29,8 +27,13 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNotifications } from "@/hooks/useNotifications";
-import { useTheme } from "@/contexts/ThemeContext";
-import { STORAGE_KEYS } from "@/lib/experience-preferences";
+import {
+  getLanguageByCode,
+  getSavedLanguageCode,
+  LANGUAGES,
+  LANGUAGE_CHANGE_EVENT,
+  setPreferredLanguage,
+} from "@/lib/experience-preferences";
 import type { UserRole } from "@/types";
 import type { AppNotification, NotificationType } from "@/types/api";
 import { cn } from "@/components/ui/utils";
@@ -76,22 +79,6 @@ type TopbarProps = {
   onLogout?: () => void | Promise<void>;
   className?: string;
 };
-
-const languages = [
-  { code: "en-IN", short: "EN", native: "English", label: "English" },
-  { code: "hi-IN", short: "हिं", native: "हिंदी", label: "Hindi" },
-  { code: "bn-IN", short: "BN", native: "বাংলা", label: "Bengali" },
-  { code: "te-IN", short: "TE", native: "తెలుగు", label: "Telugu" },
-  { code: "mr-IN", short: "MR", native: "मराठी", label: "Marathi" },
-  { code: "ta-IN", short: "TA", native: "தமிழ்", label: "Tamil" },
-  { code: "ur-IN", short: "UR", native: "اردو", label: "Urdu" },
-  { code: "gu-IN", short: "GU", native: "ગુજરાતી", label: "Gujarati" },
-  { code: "kn-IN", short: "KN", native: "ಕನ್ನಡ", label: "Kannada" },
-  { code: "ml-IN", short: "ML", native: "മലയാളം", label: "Malayalam" },
-  { code: "or-IN", short: "OR", native: "ଓଡ଼ିଆ", label: "Odia" },
-  { code: "pa-IN", short: "PA", native: "ਪੰਜਾਬੀ", label: "Punjabi" },
-  { code: "as-IN", short: "AS", native: "অসমীয়া", label: "Assamese" },
-];
 
 const defaultAlerts: AlertItem[] = [
   {
@@ -383,7 +370,6 @@ export function Topbar({
   className,
 }: TopbarProps) {
   const router = useRouter();
-  const { theme, toggleTheme } = useTheme();
   const { user: authUser, logout } = useAuth();
   const {
     notifications,
@@ -392,13 +378,10 @@ export function Topbar({
   } = useNotifications();
   const [openMenu, setOpenMenu] = useState<"alerts" | "language" | "user" | null>(null);
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [languageCode, setLanguageCode] = useState(() => {
-    if (typeof window === "undefined") return "en-IN";
-    return localStorage.getItem(STORAGE_KEYS.language) || "en-IN";
-  });
+  const [languageCode, setLanguageCode] = useState(() => getSavedLanguageCode());
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const selectedLanguage = languages.find((language) => language.code === languageCode) ?? languages[0];
+  const selectedLanguage = getLanguageByCode(languageCode);
   const customNotifications = useMemo(() => alerts.map(alertToNotification), [alerts]);
   const hasCustomAlerts = alerts !== defaultAlerts;
   const notificationItems = notifications.length ? notifications : hasCustomAlerts ? customNotifications : [];
@@ -438,11 +421,23 @@ export function Topbar({
     };
   }, []);
 
+  useEffect(() => {
+    const syncLanguage = () => setLanguageCode(getSavedLanguageCode());
+
+    syncLanguage();
+    window.addEventListener(LANGUAGE_CHANGE_EVENT, syncLanguage);
+    window.addEventListener("storage", syncLanguage);
+
+    return () => {
+      window.removeEventListener(LANGUAGE_CHANGE_EVENT, syncLanguage);
+      window.removeEventListener("storage", syncLanguage);
+    };
+  }, []);
+
   const chooseLanguage = (code: string) => {
-    setLanguageCode(code);
-    document.documentElement.lang = code;
-    localStorage.setItem(STORAGE_KEYS.language, code);
-    window.dispatchEvent(new Event("elv-language-change"));
+    const language = getLanguageByCode(code);
+    setLanguageCode(language.code);
+    setPreferredLanguage(language.code);
     setOpenMenu(null);
   };
 
@@ -491,7 +486,7 @@ export function Topbar({
             <Search className="h-4 w-4 shrink-0" />
             <span className="min-w-0 flex-1 truncate font-semibold">Search pages, jobs, engineers...</span>
             <span className="hidden rounded border border-border-subtle bg-surface-raised px-1.5 py-0.5 font-mono text-[11px] font-bold text-muted-foreground sm:inline">
-              ⌘K
+              Ctrl K
             </span>
           </button>
 
@@ -579,25 +574,6 @@ export function Topbar({
               ) : null}
             </div>
 
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="relative grid h-10 w-10 place-items-center overflow-hidden rounded-md border border-border-subtle bg-surface text-muted-foreground shadow-sm transition hover:-translate-y-px hover:border-primary/30 hover:bg-primary-subtle hover:text-primary"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={theme}
-                  initial={{ y: 12, opacity: 0, rotate: -30 }}
-                  animate={{ y: 0, opacity: 1, rotate: 0 }}
-                  exit={{ y: -12, opacity: 0, rotate: 30 }}
-                  transition={{ duration: 0.16 }}
-                >
-                  {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                </motion.span>
-              </AnimatePresence>
-            </button>
-
             <div className="relative">
               <button
                 type="button"
@@ -611,7 +587,7 @@ export function Topbar({
 
               {openMenu === "language" ? (
                 <div className="absolute right-0 top-12 z-50 max-h-96 w-72 overflow-y-auto rounded-md border border-border-subtle bg-surface p-2 shadow-lg">
-                  {languages.map((language) => (
+                  {LANGUAGES.map((language) => (
                     <button
                       key={language.code}
                       type="button"

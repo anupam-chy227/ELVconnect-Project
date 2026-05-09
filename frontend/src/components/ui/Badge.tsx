@@ -20,7 +20,7 @@ export type BadgeProps = Omit<HTMLAttributes<HTMLSpanElement>, "style"> & {
 
 const tones: Record<BadgeTone, string> = {
   neutral: "border-slate-200 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200",
-  primary: "border-indigo-200 bg-indigo-50 text-indigo-700 dark:border-indigo-900 dark:bg-indigo-950/50 dark:text-indigo-200",
+  primary: "border-primary/25 bg-primary-subtle text-primary dark:border-primary/35 dark:bg-primary-subtle dark:text-primary",
   success: "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-200",
   warning: "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900 dark:bg-amber-950/50 dark:text-amber-200",
   danger: "border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-900 dark:bg-rose-950/50 dark:text-rose-200",

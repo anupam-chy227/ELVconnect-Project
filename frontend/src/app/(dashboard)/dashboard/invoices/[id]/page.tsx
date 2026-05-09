@@ -189,7 +189,7 @@ export default function InvoiceDetailPage() {
             <div className="flex gap-2 flex-wrap justify-end">
               <button
                 onClick={handleDownloadPDF}
-                className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors"
+                className="flex items-center gap-2 rounded-lg border border-primary/25 bg-primary-subtle px-4 py-2 text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle"
               >
                 <Download className="w-4 h-4" />
                 Download PDF
@@ -199,7 +199,7 @@ export default function InvoiceDetailPage() {
                 <button
                   onClick={handleSendEmail}
                   disabled={sendEmailMutation.loading}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors disabled:opacity-50"
+                  className="flex items-center gap-2 rounded-lg border border-primary/25 bg-primary-subtle px-4 py-2 text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
                   {sendEmailMutation.loading ? "Sending..." : "Send"}
@@ -209,7 +209,7 @@ export default function InvoiceDetailPage() {
               {invoice.status === "draft" && (
                 <button
                   onClick={() => setIsEditMode(!isEditMode)}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                  className="flex items-center gap-2 rounded-lg border border-primary/25 bg-white px-4 py-2 text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle"
                 >
                   <Edit2 className="w-4 h-4" />
                   Edit
@@ -419,7 +419,7 @@ export default function InvoiceDetailPage() {
                 {balanceDue > 0 && (
                   <button
                     onClick={() => setShowPaymentForm(!showPaymentForm)}
-                    className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold flex items-center justify-center gap-2"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
                   >
                     <Plus className="w-4 h-4" />
                     Record Payment
@@ -442,7 +442,7 @@ export default function InvoiceDetailPage() {
                         onChange={(e) => setPaymentAmount(parseFloat(e.target.value) || 0)}
                         max={balanceDue}
                         step="0.01"
-                        className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                        className="w-full rounded-lg border-2 border-gray-300 px-3 py-2 focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
                       />
                       <p className="text-xs text-gray-500 mt-1">
                         Max: {invoice.currency} {balanceDue.toFixed(2)}
@@ -456,7 +456,7 @@ export default function InvoiceDetailPage() {
                       <select
                         value={paymentMethod}
                         onChange={(e) => setPaymentMethod(e.target.value)}
-                        className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                        className="w-full rounded-lg border-2 border-gray-300 px-3 py-2 focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
                       >
                         <option value="bank_transfer">Bank Transfer</option>
                         <option value="cash">Cash</option>
@@ -469,14 +469,14 @@ export default function InvoiceDetailPage() {
                       <button
                         type="submit"
                         disabled={addPaymentMutation.loading || paymentAmount <= 0}
-                        className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 transition-colors font-semibold"
+                        className="flex-1 rounded-lg bg-primary px-4 py-2 font-semibold text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container disabled:bg-gray-400"
                       >
                         {addPaymentMutation.loading ? "Recording..." : "Record Payment"}
                       </button>
                       <button
                         type="button"
                         onClick={() => setShowPaymentForm(false)}
-                        className="flex-1 px-4 py-2 border-2 border-gray-300 text-gray-900 rounded-lg hover:border-gray-400"
+                        className="flex-1 rounded-lg border-2 border-primary/25 px-4 py-2 font-semibold text-primary hover:border-primary/45 hover:bg-primary-subtle"
                       >
                         Cancel
                       </button>

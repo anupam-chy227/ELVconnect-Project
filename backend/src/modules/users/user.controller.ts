@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { Types } from 'mongoose';
 import * as userService from './user.service';
 
+const str = (v: string | string[] | undefined): string => (Array.isArray(v) ? v[0] : v) ?? '';
+
 export const getProfile = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!Types.ObjectId.isValid(req.user!._id)) {
@@ -75,6 +77,13 @@ export const listEngineers = async (req: Request, res: Response, next: NextFunct
       limit: Number(req.query.limit) || 20,
     });
     res.status(200).json({ success: true, ...result });
+  } catch (error) { next(error); }
+};
+
+export const getEngineerById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const engineer = await userService.getEngineerById(str(req.params.id));
+    res.status(200).json({ success: true, data: engineer });
   } catch (error) { next(error); }
 };
 

@@ -63,6 +63,8 @@ type LegacyRefreshResponse = {
   refreshToken?: string;
 };
 
+type UserResponse = User | { user: User };
+
 export class ApiClientError extends Error {
   readonly status?: number;
   readonly validationErrors?: Record<string, string>;
@@ -143,7 +145,7 @@ function redirectToLogin() {
   if (typeof window === "undefined") return;
 
   const returnUrl = `${window.location.pathname}${window.location.search}`;
-  window.location.assign(`/auth/login?returnUrl=${encodeURIComponent(returnUrl)}`);
+  window.location.assign(`/login?returnUrl=${encodeURIComponent(returnUrl)}`);
 }
 
 function normalizeLoginResponse(payload: LegacyAuthResponse | LoginResponse): LoginResponse {
@@ -171,6 +173,10 @@ function normalizeRefreshResponse(payload: LegacyRefreshResponse | RefreshRespon
     token,
     refreshToken: payload.refreshToken,
   };
+}
+
+function normalizeUserResponse(payload: UserResponse): User {
+  return isRecord(payload) && "user" in payload ? (payload.user as User) : payload;
 }
 
 class ApiClient {
@@ -365,8 +371,8 @@ export const authAPI = {
 };
 
 export const usersAPI = {
-  getMyProfile: () => get<User>("/users/me"),
-  updateMyProfile: (data: Partial<UserProfile>) => patch<User>("/users/me", data),
+  getMyProfile: async () => normalizeUserResponse(await get<UserResponse>("/users/me")),
+  updateMyProfile: async (data: Partial<UserProfile>) => normalizeUserResponse(await patch<UserResponse>("/users/me", data)),
   getEngineerDirectory: (params?: EngineerDirectoryParams) => get<Engineer[]>("/users/engineers", params),
   getEngineerById: (id: string) => get<Engineer>(`/users/engineers/${id}`),
   getEngineerReviews: (id: string) => get<EngineerReview[]>(`/users/engineers/${id}/reviews`),
@@ -378,10 +384,10 @@ export const jobsAPI = {
   postJob: (data: CreateJobPayload) => post<Job>("/jobs", data),
   browseJobsBoard: (params?: JobFilterParams) => get<JobsResponse>("/jobs", params),
   searchJobsNearMe: (lat: number, lng: number, radius?: number) =>
-    get<Job[]>("/jobs/near-me", { lat, lng, radius: radius ?? 25 }),
+    get<Job[]>("/jobs", { lat, lng, radius: radius ?? 25 }),
   getJobById: (id: string) => get<Job>(`/jobs/${id}`),
   applyToJob: (jobId: string, data: ApplicationPayload) => post<Application>(`/jobs/${jobId}/apply`, data),
-  getMyJobs: () => get<Job[]>("/jobs/my-jobs"),
+  getMyJobs: () => get<Job[]>("/jobs/my"),
   updateJobStatus: (jobId: string, status: string) => patch<Job>(`/jobs/${jobId}/status`, { status }),
   getJobApplications: (jobId: string) => get<Application[]>(`/jobs/${jobId}/applications`),
   getMyApplications: () => get<Application[]>("/jobs/my-applications"),
@@ -391,7 +397,7 @@ export const jobsAPI = {
 
 export const invoicesAPI = {
   createInvoice: (data: CreateInvoicePayload) => post<Invoice>("/invoices", data),
-  getMyInvoices: () => get<Invoice[]>("/invoices/my-invoices"),
+  getMyInvoices: () => get<Invoice[]>("/invoices"),
   getInvoiceById: (id: string) => get<Invoice>(`/invoices/${id}`),
   updateInvoiceStatus: (id: string, status: string) => patch<Invoice>(`/invoices/${id}/status`, { status }),
   requestPayout: () => post<ApiEnvelope<null>>("/invoices/request-payout", {}),

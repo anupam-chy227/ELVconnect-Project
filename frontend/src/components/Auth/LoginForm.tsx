@@ -88,7 +88,7 @@ export function LoginForm() {
           </span>
         </div>
         <h1 className="mb-2 text-4xl font-black tracking-tight text-foreground">Welcome back</h1>
-        <p className="mb-7 text-sm leading-6 text-muted-foreground">
+        <p className="mb-7 text-sm font-semibold leading-6" style={{ color: "#0b1f46" }}>
           Continue to your secure command center for jobs, engineers, payments, and project follow-up.
         </p>
 
@@ -185,10 +185,11 @@ export function LoginForm() {
           </div>
         </div>
 
-        <p className="mt-6 text-center text-muted-foreground">
+        <p className="mt-6 text-center">
           <a
             href="/register"
-            className="font-bold text-primary transition-colors hover:text-secondary"
+            className="font-bold transition-colors hover:opacity-80"
+            style={{ color: "#0b1f46" }}
           >
             Create an account
           </a>

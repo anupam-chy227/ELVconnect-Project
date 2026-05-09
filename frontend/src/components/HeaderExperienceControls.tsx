@@ -3,26 +3,22 @@
 import { useEffect, useState } from "react";
 import { Bell, Check, ChevronDown, Languages, MapPin, Navigation } from "lucide-react";
 import {
-  getLocationByName,
+  applyDocumentLanguage,
+  getLanguageByCode,
+  getSavedLocationPreference,
+  getSavedLanguageCode,
   INDIA_LOCATIONS,
   LANGUAGES,
+  LANGUAGE_CHANGE_EVENT,
   LocationOption,
+  setPreferredLocation,
+  setPreferredLanguage,
+  syncLocationToCurrentPath,
   STORAGE_KEYS,
 } from "@/lib/experience-preferences";
 
 function getSavedLanguage() {
-  if (typeof window === "undefined") return "en-IN";
-  return localStorage.getItem(STORAGE_KEYS.language) || "en-IN";
-}
-
-function getSavedLocation() {
-  if (typeof window === "undefined") return INDIA_LOCATIONS[0];
-  const savedLocation = localStorage.getItem(STORAGE_KEYS.location) || "All India";
-  const savedLat = Number(localStorage.getItem("elv-location-lat"));
-  const savedLng = Number(localStorage.getItem("elv-location-lng"));
-  return savedLocation === "Current Location" && savedLat && savedLng
-    ? { name: "Current Location", lat: savedLat, lng: savedLng }
-    : getLocationByName(savedLocation);
+  return getSavedLanguageCode();
 }
 
 function getNotificationStatus(): NotificationPermission | "unsupported" {
@@ -37,10 +33,10 @@ export default function HeaderExperienceControls() {
   const [notificationStatus, setNotificationStatus] = useState<NotificationPermission | "unsupported">("default");
   const [isLocating, setIsLocating] = useState(false);
 
-  const language = LANGUAGES.find((item) => item.code === languageCode) || LANGUAGES[0];
+  const language = getLanguageByCode(languageCode);
 
   useEffect(() => {
-    document.documentElement.lang = languageCode;
+    applyDocumentLanguage(languageCode);
   }, [languageCode]);
 
   useEffect(() => {
@@ -50,34 +46,32 @@ export default function HeaderExperienceControls() {
       if (!isMounted) return;
 
       setLanguageCode(getSavedLanguage());
-      setLocation(getSavedLocation());
+      setLocation(getSavedLocationPreference());
       setNotificationStatus(getNotificationStatus());
     });
 
+    const syncLanguage = () => setLanguageCode(getSavedLanguage());
+    window.addEventListener(LANGUAGE_CHANGE_EVENT, syncLanguage);
+    window.addEventListener("storage", syncLanguage);
+
     return () => {
       isMounted = false;
+      window.removeEventListener(LANGUAGE_CHANGE_EVENT, syncLanguage);
+      window.removeEventListener("storage", syncLanguage);
     };
   }, []);
 
   const chooseLanguage = (code: string) => {
-    setLanguageCode(code);
-    document.documentElement.lang = code;
-    localStorage.setItem(STORAGE_KEYS.language, code);
-    window.dispatchEvent(new Event("elv-language-change"));
+    const language = getLanguageByCode(code);
+    setLanguageCode(language.code);
+    setPreferredLanguage(language.code);
     setOpenPanel(null);
   };
 
   const chooseLocation = (value: LocationOption) => {
     setLocation(value);
-    localStorage.setItem(STORAGE_KEYS.location, value.name);
-    if (value.lat && value.lng) {
-      localStorage.setItem("elv-location-lat", String(value.lat));
-      localStorage.setItem("elv-location-lng", String(value.lng));
-    } else {
-      localStorage.removeItem("elv-location-lat");
-      localStorage.removeItem("elv-location-lng");
-    }
-    window.dispatchEvent(new Event("elv-location-change"));
+    setPreferredLocation(value);
+    syncLocationToCurrentPath(value);
     setOpenPanel(null);
   };
 
@@ -120,17 +114,17 @@ export default function HeaderExperienceControls() {
   };
 
   return (
-    <div className="relative flex items-center gap-2">
+    <div className="relative flex items-center gap-1.5">
       <div className="relative">
         <button
           type="button"
           title="Choose language"
           onClick={() => setOpenPanel(openPanel === "language" ? null : "language")}
-          className="flex h-10 items-center gap-2 rounded-md border border-border-subtle bg-surface-raised px-3 text-sm font-semibold text-muted-foreground shadow-sm backdrop-blur-xl transition hover:border-primary/35 hover:text-primary"
+          className="flex h-9 items-center gap-1.5 rounded-md border border-border-subtle bg-surface-raised px-2.5 text-xs font-semibold text-muted-foreground shadow-sm backdrop-blur-xl transition hover:border-primary/35 hover:text-primary"
         >
-          <Languages className="h-4 w-4" />
+          <Languages className="h-3.5 w-3.5" />
           <span className="hidden lg:inline">{language.native}</span>
-          <ChevronDown className="h-3.5 w-3.5" />
+          <ChevronDown className="h-3 w-3" />
         </button>
         {openPanel === "language" && (
           <div className="absolute right-0 top-12 z-50 max-h-80 w-72 overflow-auto rounded-md border border-border-subtle bg-surface-raised p-2 shadow-floating backdrop-blur-2xl">
@@ -157,20 +151,20 @@ export default function HeaderExperienceControls() {
           type="button"
           title="Choose location"
           onClick={() => setOpenPanel(openPanel === "location" ? null : "location")}
-          className="flex h-10 items-center gap-2 rounded-md border border-primary/20 bg-primary-subtle px-3 text-sm font-black text-primary shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-primary/35 hover:bg-white hover:shadow-md dark:hover:bg-slate-900"
+          className="flex h-9 items-center gap-1.5 rounded-md border border-primary/20 bg-primary-subtle px-2.5 text-xs font-black text-primary shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-primary/35 hover:bg-white hover:shadow-md dark:hover:bg-slate-900"
           aria-haspopup="dialog"
           aria-expanded={openPanel === "location"}
         >
-          <MapPin className="h-4 w-4" />
-          <span className="hidden max-w-36 truncate sm:inline">{location.name}</span>
-          <ChevronDown className="h-3.5 w-3.5" />
+          <MapPin className="h-3.5 w-3.5" />
+          <span className="hidden max-w-28 truncate sm:inline">{location.name}</span>
+          <ChevronDown className="h-3 w-3" />
         </button>
         {openPanel === "location" && (
           <div className="absolute right-0 top-12 z-50 max-h-96 w-80 overflow-auto rounded-md border border-border-subtle bg-surface-raised p-2 shadow-floating backdrop-blur-2xl">
             <button
               type="button"
               onClick={useCurrentLocation}
-              className="mb-2 flex w-full items-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-2 text-sm font-semibold text-on-primary shadow-sm hover:opacity-90"
+              className="mb-2 flex w-full items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container"
             >
               <Navigation className="h-4 w-4" />
               {isLocating ? "Finding location..." : "Use current GPS location"}
@@ -195,9 +189,9 @@ export default function HeaderExperienceControls() {
           type="button"
           title="Notifications"
           onClick={() => setOpenPanel(openPanel === "notification" ? null : "notification")}
-          className="relative flex h-10 w-10 items-center justify-center rounded-md border border-border-subtle bg-surface-raised text-muted-foreground shadow-sm backdrop-blur-xl transition hover:border-primary/35 hover:text-primary"
+          className="relative flex h-9 w-9 items-center justify-center rounded-md border border-border-subtle bg-surface-raised text-muted-foreground shadow-sm backdrop-blur-xl transition hover:border-primary/35 hover:text-primary"
         >
-          <Bell className="h-4 w-4" />
+          <Bell className="h-3.5 w-3.5" />
           {notificationStatus === "granted" && (
             <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-emerald-500" />
           )}
@@ -211,7 +205,7 @@ export default function HeaderExperienceControls() {
             <button
               type="button"
               onClick={enableNotifications}
-              className="mt-4 w-full rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-2 text-sm font-semibold text-on-primary shadow-sm hover:opacity-90 disabled:opacity-60"
+              className="mt-4 w-full rounded-md bg-primary px-3 py-2 text-sm font-semibold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container disabled:opacity-60"
               disabled={notificationStatus === "unsupported"}
             >
               {notificationStatus === "granted" ? "Send test notification" : "Enable notifications"}

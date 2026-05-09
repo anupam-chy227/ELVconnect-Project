@@ -38,6 +38,7 @@ export type AuthUser = {
     specializations?: ELVCategory[];
     yearsOfExperience?: number;
     certifications?: string[];
+    gstNumber?: string;
     serviceArea?: {
       city?: string;
       country?: string;
@@ -170,6 +171,7 @@ function normalizeUser(user: ApiUser | LoginResponse["user"]): AuthUser {
           specializations: categories as ELVCategory[],
           yearsOfExperience: serviceProvider.yearsOfExperience,
           certifications: serviceProvider.certifications,
+          gstNumber: serviceProvider.gstNumber,
           serviceArea: serviceProvider.serviceArea,
           location: serviceProvider.location,
           serviceRadius: serviceProvider.serviceRadius,
@@ -338,10 +340,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(async () => {
     try {
       await authAPI.logout();
+    } catch {
+      // Local sign-out should still complete when the server has already invalidated the refresh token.
     } finally {
       clearTokens();
       setUser(null);
-      router.push("/auth/login");
+      router.push("/login");
     }
   }, [router]);
 

@@ -3,6 +3,33 @@ import { User } from '../users/user.model';
 import { CreateJobInput } from './job.schema';
 import { Types } from 'mongoose';
 
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+const LOCATION_ALIASES: Record<string, string[]> = {
+  'Delhi NCR': ['Delhi NCR', 'Delhi', 'New Delhi', 'Gurugram', 'Gurgaon', 'Noida', 'Faridabad', 'Ghaziabad', 'Manesar'],
+  Maharashtra: ['Maharashtra', 'Mumbai', 'Pune', 'Navi Mumbai', 'Thane', 'Nagpur', 'Chakan'],
+  Karnataka: ['Karnataka', 'Bengaluru', 'Bangalore', 'Mysuru'],
+  Telangana: ['Telangana', 'Hyderabad', 'Secunderabad'],
+  Gujarat: ['Gujarat', 'Ahmedabad', 'Surat', 'Vadodara', 'Rajkot'],
+  'Tamil Nadu': ['Tamil Nadu', 'Chennai', 'Coimbatore', 'Madurai'],
+  'West Bengal': ['West Bengal', 'Kolkata', 'Howrah'],
+};
+
+function getCityPatterns(city: string) {
+  return (LOCATION_ALIASES[city] || [city]).map((alias) => new RegExp(escapeRegExp(alias), 'i'));
+}
+
+function toFiniteNumber(value: string | undefined) {
+  if (value === undefined || value.trim() === '') {
+    return undefined;
+  }
+
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : undefined;
+}
+
 // ── Create Job ────────────────────────────────────────────────────────────
 export const createJob = async (customerId: string, data: CreateJobInput) => {
   const job = await Job.create({
@@ -38,11 +65,11 @@ export const listJobs = async (query: {
   else filter.status = 'open';
   if (query.category) filter.category = query.category;
   if (query.city && query.city !== 'All India') {
-    filter.$or = [
-      { 'location.city': new RegExp(query.city, 'i') },
-      { 'location.address': new RegExp(query.city, 'i') },
-      { 'location.country': new RegExp(query.city, 'i') },
-    ];
+    filter.$or = getCityPatterns(query.city).flatMap((cityPattern) => [
+      { 'location.city': cityPattern },
+      { 'location.address': cityPattern },
+      { 'location.country': cityPattern },
+    ]);
   }
 
   const page = query.page || 1;
@@ -50,23 +77,23 @@ export const listJobs = async (query: {
   const skip = (page - 1) * limit;
 
   // Geo query
-  if (query.lat && query.lng) {
-    const radiusKm = parseFloat(query.radius || '25');
-    const [data, total] = await Promise.all([
-      Job.find({
-        ...filter,
-        location: {
-          $near: {
-            $geometry: {
-              type: 'Point',
-              coordinates: [parseFloat(query.lng), parseFloat(query.lat)],
-            },
-            $maxDistance: radiusKm * 1000, // metres
+  const lat = toFiniteNumber(query.lat);
+  const lng = toFiniteNumber(query.lng);
+  if (lat !== undefined && lng !== undefined) {
+    const radiusKm = toFiniteNumber(query.radius) || 25;
+    const data = await Job.find({
+      ...filter,
+      location: {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [lng, lat],
           },
+          $maxDistance: radiusKm * 1000, // metres
         },
-      }).skip(skip).limit(limit).populate('customerId', 'profile.fullName profile.companyName'),
-      Job.countDocuments(filter),
-    ]);
+      },
+    }).skip(skip).limit(limit).populate('customerId', 'profile.fullName profile.companyName');
+    const total = data.length;
     return { data, pagination: { total, page, limit, totalPages: Math.ceil(total / limit) } };
   }
 

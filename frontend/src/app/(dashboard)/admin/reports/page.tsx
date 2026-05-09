@@ -283,7 +283,7 @@ export default function AdminReportsPage() {
                     className={`rounded-md border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-lg ${
                       active
                         ? "border-indigo-300 bg-indigo-50/80 ring-4 ring-indigo-100 dark:border-indigo-800 dark:bg-indigo-950/30 dark:ring-indigo-950"
-                        : "border-slate-200 bg-white/85 hover:border-indigo-200 dark:border-slate-800 dark:bg-slate-950/75"
+                        : "border-slate-200 bg-white/85 hover:border-primary/35 dark:border-slate-800 dark:bg-slate-950/75"
                     }`}
                   >
                     <div className="flex items-start gap-3">
@@ -382,7 +382,7 @@ export default function AdminReportsPage() {
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder="Report name, city, owner..."
-                  className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-indigo-950"
+                  className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
                 />
               </div>
             </label>
@@ -474,7 +474,7 @@ function ReportRowItem({
           type="button"
           onClick={() => onExport(`CSV export queued for ${report.id}`)}
           disabled={report.status !== "ready"}
-          className="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-200 hover:text-indigo-700 hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200"
+          className="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/35 hover:text-primary hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200"
         >
           <FileSpreadsheet className="h-3.5 w-3.5" />
           CSV
@@ -483,7 +483,7 @@ function ReportRowItem({
           type="button"
           onClick={() => onExport(`PDF export queued for ${report.id}`)}
           disabled={report.status !== "ready"}
-          className="inline-flex items-center gap-1.5 rounded-md border border-indigo-200 bg-indigo-50 px-2.5 py-2 text-xs font-bold text-indigo-700 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 dark:border-indigo-900 dark:bg-indigo-950/40 dark:text-indigo-200"
+          className="inline-flex items-center gap-1.5 rounded-md border border-primary/25 bg-primary-subtle px-2.5 py-2 text-xs font-bold text-primary shadow-sm transition hover:-translate-y-0.5 hover:border-primary/45 hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 dark:border-primary/35 dark:bg-primary-subtle dark:text-primary"
         >
           <FileDown className="h-3.5 w-3.5" />
           PDF
@@ -521,7 +521,7 @@ function FilterDate({
           type="date"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-indigo-950"
+          className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
         />
       </div>
     </label>
@@ -545,7 +545,7 @@ function FilterSelect({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-indigo-950"
+        className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
       >
         {options.map((option) => (
           <option key={option} value={option}>

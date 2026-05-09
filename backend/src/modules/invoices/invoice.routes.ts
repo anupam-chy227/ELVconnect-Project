@@ -16,6 +16,7 @@ router.use(requireAuth);
 
 // GET /api/v1/invoices
 router.get('/', invoiceController.listInvoices);
+router.get('/my-invoices', invoiceController.listInvoices);
 
 // POST /api/v1/invoices
 router.post('/', roleGuard('customer', 'service_provider', 'admin'), validate(createInvoiceSchema), invoiceController.createInvoice);

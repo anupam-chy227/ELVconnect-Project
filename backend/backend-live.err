@@ -1,370 +1,65 @@
-Error: Missing credentials. Please pass an `apiKey`, `workloadIdentity`, or set the `OPENAI_API_KEY` environment variable.
-    at new OpenAI (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\openai\src\client.ts:415:13)
-    at Object.<anonymous> (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\services\aiService.ts:3:16)
-    at Module.<anonymous> (node:internal/modules/cjs/loader:1812:14)
-    at Module._compile (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\source-map-support\source-map-support.js:568:25)
-    at Module.m._compile (C:\Users\HP\AppData\Local\Temp\ts-node-dev-hook-9620409583308309.js:69:33)
-    at node:internal/modules/cjs/loader:1943:10
-    at require.extensions..jsx.require.extensions..js (C:\Users\HP\AppData\Local\Temp\ts-node-dev-hook-9620409583308309.js:114:20)
-    at require.extensions.<computed> (C:\Users\HP\AppData\Local\Temp\ts-node-dev-hook-9620409583308309.js:71:20)
-    at Object.nodeDevHook [as .ts] (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\ts-node-dev\lib\hook.js:63:13)
-    at Module.load (node:internal/modules/cjs/loader:1533:32)
-Error: MongoServerSelectionError: 98140000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:openssl\ssl\record\rec_layer_s3.c:918:SSL alert number 80
-
-    at Topology.selectServer (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\sdam\topology.ts:637:30)
-    at runNextTicks (node:internal/process/task_queues:65:5)
-    at processTimers (node:internal/timers:538:9)
-    at tryOperation (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\operations\execute_operation.ts:271:16)
-    at executeOperation (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\operations\execute_operation.ts:123:12)
-    at AggregationCursor._initialize (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\aggregation_cursor.ts:92:22)
-    at AggregationCursor.cursorInit (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
-    at AggregationCursor.fetchBatch (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
-    at AggregationCursor.next (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9)
-    at Collection.countDocuments (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\collection.ts:849:17) {
-  errorLabelSet: Set(0) {},
-  reason: TopologyDescription {
-    type: 'ReplicaSetNoPrimary',
-    servers: Map(3) {
-      'ac-vpv6yyt-shard-00-00.rcojgh6.mongodb.net:27017' => [ServerDescription],
-      'ac-vpv6yyt-shard-00-01.rcojgh6.mongodb.net:27017' => [ServerDescription],
-      'ac-vpv6yyt-shard-00-02.rcojgh6.mongodb.net:27017' => [ServerDescription]
-    },
-    stale: false,
-    compatible: true,
-    heartbeatFrequencyMS: 10000,
-    localThresholdMS: 15,
-    setName: 'atlas-kb084w-shard-0',
-    maxElectionId: new ObjectId('7fffffff00000000000003f6'),
-    maxSetVersion: 290,
-    commonWireVersion: 25,
-    logicalSessionTimeoutMinutes: 30
-  },
-  code: undefined,
-  [cause]: MongoNetworkError: 98140000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:openssl\ssl\record\rec_layer_s3.c:918:SSL alert number 80
-  
-      at TLSSocket.<anonymous> (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cmap\connect.ts:428:16)
-      at Object.onceWrapper (node:events:623:26)
-      at TLSSocket.emit (node:events:508:28)
-      at emitErrorNT (node:internal/streams/destroy:170:8)
-      at emitErrorCloseNT (node:internal/streams/destroy:129:3)
-      at processTicksAndRejections (node:internal/process/task_queues:90:21) {
-    errorLabelSet: Set(3) { 'SystemOverloadedError', 'RetryableError', 'ResetPool' },
-    beforeHandshake: false,
-    [cause]: [Error: 98140000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:openssl\ssl\record\rec_layer_s3.c:918:SSL alert number 80
-    ] {
-      library: 'SSL routines',
-      reason: 'tlsv1 alert internal error',
-      code: 'ERR_SSL_TLSV1_ALERT_INTERNAL_ERROR'
-    }
-  }
-}
-Error: MongoServerSelectionError: 98140000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:openssl\ssl\record\rec_layer_s3.c:918:SSL alert number 80
-
-    at Topology.selectServer (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\sdam\topology.ts:637:30)
-    at tryOperation (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\operations\execute_operation.ts:206:16)
-    at executeOperation (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\operations\execute_operation.ts:123:12)
-    at FindCursor._initialize (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
-    at FindCursor.cursorInit (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
-    at FindCursor.fetchBatch (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
-    at FindCursor.next (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9)
-    at Collection.findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\collection.ts:552:20)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2771:15)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:63) {
-  errorLabelSet: Set(0) {},
-  reason: TopologyDescription {
-    type: 'ReplicaSetNoPrimary',
-    servers: Map(3) {
-      'ac-vpv6yyt-shard-00-00.rcojgh6.mongodb.net:27017' => [ServerDescription],
-      'ac-vpv6yyt-shard-00-01.rcojgh6.mongodb.net:27017' => [ServerDescription],
-      'ac-vpv6yyt-shard-00-02.rcojgh6.mongodb.net:27017' => [ServerDescription]
-    },
-    stale: false,
-    compatible: true,
-    heartbeatFrequencyMS: 10000,
-    localThresholdMS: 15,
-    setName: 'atlas-kb084w-shard-0',
-    maxElectionId: new ObjectId('7fffffff00000000000003f6'),
-    maxSetVersion: 290,
-    commonWireVersion: 25,
-    logicalSessionTimeoutMinutes: null
-  },
-  code: undefined,
-  [cause]: MongoNetworkError: 98140000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:openssl\ssl\record\rec_layer_s3.c:918:SSL alert number 80
-  
-      at TLSSocket.<anonymous> (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongodb\src\cmap\connect.ts:428:16)
-      at Object.onceWrapper (node:events:623:26)
-      at TLSSocket.emit (node:events:508:28)
-      at emitErrorNT (node:internal/streams/destroy:170:8)
-      at emitErrorCloseNT (node:internal/streams/destroy:129:3)
-      at processTicksAndRejections (node:internal/process/task_queues:90:21) {
-    errorLabelSet: Set(3) { 'SystemOverloadedError', 'RetryableError', 'ResetPool' },
-    beforeHandshake: false,
-    [cause]: [Error: 98140000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:openssl\ssl\record\rec_layer_s3.c:918:SSL alert number 80
-    ] {
-      library: 'SSL routines',
-      reason: 'tlsv1 alert internal error',
-      code: 'ERR_SSL_TLSV1_ALERT_INTERNAL_ERROR'
-    }
-  }
-}
-Error: CastError: Cast to ObjectId failed for value "112648531418107478180" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
+Error: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+    at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
+    at Object.getInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.service.ts:130:10)
+    at getInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.controller.ts:36:42)
+    at Layer.handleRequest (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:295:15
+    at param (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:600:14)
+Error: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+    at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
+    at Object.getInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.service.ts:130:10)
+    at getInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.controller.ts:36:42)
+    at Layer.handleRequest (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:295:15
+    at param (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:600:14)
+Error: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+    at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
+    at Object.getInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.service.ts:130:10)
+    at getInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.controller.ts:36:42)
+    at Layer.handleRequest (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:295:15
+    at param (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\router\index.js:600:14)
+Error: Error: Invalid or expired reset token
+    at Object.resetPassword (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:298:17)
     at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"112648531418107478180"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '112648531418107478180',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
+    at resetPassword (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.controller.ts:228:5) {
+  statusCode: 400,
+  code: 'INVALID_REQUEST'
 }
-Error: CastError: Cast to ObjectId failed for value "112648531418107478180" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
+(node:21884) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21884) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:21884) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+Error: Error: Only draft invoices can be deleted
+    at Object.deleteInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.service.ts:198:37)
     at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"112648531418107478180"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '112648531418107478180',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
+    at deleteInvoice (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\invoices\invoice.controller.ts:57:20) {
+  statusCode: 400,
+  code: 'INVALID_REQUEST'
 }
-Error: CastError: Cast to ObjectId failed for value "112648531418107478180" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"112648531418107478180"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '112648531418107478180',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
-}
-Error: CastError: Cast to ObjectId failed for value "112648531418107478180" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"112648531418107478180"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '112648531418107478180',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
-}
-Error: CastError: Cast to ObjectId failed for value "112648531418107478180" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"112648531418107478180"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '112648531418107478180',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
-}
-Error: CastError: Cast to ObjectId failed for value "101466364162507657299" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"101466364162507657299"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '101466364162507657299',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
-}
-Error: CastError: Cast to ObjectId failed for value "101466364162507657299" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"101466364162507657299"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '101466364162507657299',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
-}
-Error: CastError: Cast to ObjectId failed for value "101466364162507657299" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"101466364162507657299"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '101466364162507657299',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
-}
-Error: CastError: Cast to ObjectId failed for value "101466364162507657299" (type string) at path "_id" for model "User"
-    at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:252:11)
-    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-    at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-    at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-    at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-    at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-    at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at Object.refreshAccessToken (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:214:16) {
-  stringValue: '"101466364162507657299"',
-  messageFormat: undefined,
-  kind: 'ObjectId',
-  value: '101466364162507657299',
-  path: '_id',
-  reason: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
-      at new ObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\bson\src\objectid.ts:113:15)
-      at castObjectId (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast\objectid.js:25:12)
-      at SchemaObjectId.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schema\objectId.js:250:12)
-      at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1320:12)
-      at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\schemaType.js:1746:17)
-      at cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\cast.js:386:32)
-      at model.Query.Query.cast (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:5212:12)
-      at model.Query.Query._castConditions (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2409:10)
-      at model.Query._findOne (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:2756:8)
-      at model.Query.exec (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\query.js:4797:80),
-  valueType: 'string'
+(node:21884) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:21884) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:5604) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5604) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(node:5604) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+Error: VersionError: No matching document found for id "69f24458d143f96a44f8c7a4" version 59 modifiedPaths "refreshTokens"
+    at generateVersionError (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\model.js:590:10)
+    at model.save (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\node_modules\mongoose\lib\model.js:652:30)
+    at Object.logout (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.service.ts:271:14)
+    at logout (C:\Users\HP\OneDrive\Desktop\ELV CONNECT\backend\src\modules\auth\auth.controller.ts:202:7) {
+  version: 59,
+  modifiedPaths: [ 'refreshTokens' ]
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -109,9 +108,6 @@ type Review = {
   score: string;
 };
 
-const heroImage =
-  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2400&q=85";
-
 const serviceCategories: ServiceCategory[] = [
   {
     title: "CCTV",
@@ -213,7 +209,7 @@ const spotlights: BusinessSpotlight[] = [
     company: "Apex Auto Components",
     location: "Manesar",
     scope: "Factory CCTV and access control rollout",
-    quote: "ELV Connect gave us verified engineers, milestone evidence, and payment control without turning the project into a vendor chase.",
+    quote: "ELV Verse gave us verified engineers, milestone evidence, and payment control without turning the project into a vendor chase.",
     outcome: "16 cameras commissioned in 7 days",
     metric: "98% site coverage verified",
   },
@@ -326,9 +322,9 @@ function SectionHeader({
   return (
     <div className="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
       <div className="max-w-3xl">
-        <p className="text-xs font-black uppercase tracking-[0.18em] text-primary">{eyebrow}</p>
-        <h2 className="mt-2 text-3xl font-black tracking-tight text-foreground md:text-4xl">{title}</h2>
-        {description ? <p className="mt-3 text-sm leading-6 text-muted-foreground md:text-base">{description}</p> : null}
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-200">{eyebrow}</p>
+        <h2 className="mt-2 text-3xl font-black tracking-tight text-white md:text-4xl">{title}</h2>
+        {description ? <p className="mt-3 text-sm leading-6 text-slate-200 md:text-base">{description}</p> : null}
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}
     </div>
@@ -400,7 +396,7 @@ function LiveStatsHub() {
           );
         })}
       </div>
-      <div className="relative mt-3 rounded-md border border-slate-900/10 bg-slate-950 p-3 text-white">
+      <div className="relative mt-3 rounded-md border border-border-subtle bg-white/78 p-3 text-foreground">
         <div className="flex items-center justify-between gap-3">
           <span className="inline-flex items-center gap-2 text-xs font-black uppercase text-slate-300">
             <Banknote className="h-4 w-4 text-emerald-300" aria-hidden="true" />
@@ -408,7 +404,7 @@ function LiveStatsHub() {
           </span>
           <span className="font-mono text-sm font-black text-emerald-300">98.4%</span>
         </div>
-        <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
+        <div className="mt-2 h-2 overflow-hidden rounded-full bg-surface-muted">
           <motion.div
             key={tick}
             initial={{ width: "54%" }}
@@ -439,7 +435,7 @@ function BusinessSpotlightWidget() {
 
   return (
     <aside className="overflow-hidden rounded-lg border border-white/35 bg-white/78 text-foreground shadow-floating backdrop-blur-2xl" aria-label="Rotating business spotlight widget">
-      <div className="flex items-center justify-between gap-3 border-b border-border-subtle bg-gradient-to-r from-primary-subtle via-white to-sky-50 px-4 py-3">
+      <div className="flex items-center justify-between gap-3 border-b border-white/10 bg-gradient-to-r from-white/[0.12] via-white/[0.07] to-sky-400/10 px-4 py-3">
         <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-primary">
           <BadgeCheck className="h-3.5 w-3.5" aria-hidden="true" />
           Business spotlight
@@ -538,34 +534,41 @@ function TrustBar() {
 
 function HeroSection({ onPostJob }: { onPostJob: () => void }) {
   return (
-    <section className="relative isolate min-h-[820px] overflow-hidden border-b border-border-subtle">
-      <Image
-        src={heroImage}
-        alt="National network operations room monitoring secure ELV infrastructure"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.82)_42%,rgba(255,255,255,0.42)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(99,91,255,0.28),transparent_30rem),radial-gradient(circle_at_78%_20%,rgba(14,165,233,0.16),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(248,249,255,0.88))]" />
-      <div className="relative mx-auto flex min-h-[820px] max-w-[1500px] flex-col justify-between px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <section className="relative isolate min-h-[820px] overflow-hidden border-b border-white/10 bg-slate-950">
+      <div className="elv-hero-poster-layer absolute inset-0 bg-cover bg-center" aria-hidden="true" />
+      <video
+        className="elv-hero-video-layer absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster="/media/elv-marketplace-hero-poster.png"
+      >
+        <source src="/media/elv-marketplace-hero.webm" type="video/webm" />
+        <source src="/media/elv-marketplace-hero.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,14,0.97)_0%,rgba(2,6,14,0.9)_34%,rgba(2,6,14,0.58)_68%,rgba(2,6,14,0.76)_100%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_30%,rgba(12,170,246,0.26),transparent_30rem),radial-gradient(circle_at_20%_72%,rgba(116,104,255,0.32),transparent_28rem),linear-gradient(180deg,rgba(2,6,14,0.2)_0%,rgba(2,6,14,0.94)_100%)]" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" aria-hidden="true" />
+      <div className="relative z-10 mx-auto flex min-h-[820px] max-w-[1500px] flex-col justify-between px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/78 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-primary shadow-sm backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
             National ELV execution marketplace
           </div>
-          <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.98] tracking-tight text-foreground md:text-7xl">
+          <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.98] tracking-tight text-white md:text-7xl">
             Hire trusted ELV teams or find verified work across India.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-muted-foreground">
-            ELV Connect brings CCTV, fire safety, access control, and data networking work into one trust-first marketplace with city context, verified engineers, milestone proof, and secure UPI-ready payments.
+          <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-slate-200">
+            ELV Verse brings CCTV, fire safety, access control, and data networking work into one trust-first marketplace with city context, verified engineers, milestone proof, and secure UPI-ready payments.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={onPostJob}
-              className="group inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-6 py-4 text-base font-black text-on-primary shadow-glow transition hover:-translate-y-1 hover:shadow-floating active:translate-y-0 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
+              className="group inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-primary px-6 py-4 text-base font-black text-on-primary shadow-glow transition hover:-translate-y-1 hover:bg-primary-container hover:shadow-floating active:translate-y-0 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
             >
               <ClipboardList className="h-4 w-4" aria-hidden="true" />
               Post a Job
@@ -581,12 +584,12 @@ function HeroSection({ onPostJob }: { onPostJob: () => void }) {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-4 xl:grid-cols-[minmax(0,1fr)_560px] xl:items-end">
-          <TrustBar />
+        <div className="mt-12 grid gap-4 xl:grid-cols-[560px_minmax(0,1fr)] xl:items-end">
           <div className="grid gap-4">
             <LiveStatsHub />
             <BusinessSpotlightWidget />
           </div>
+          <TrustBar />
         </div>
       </div>
     </section>
@@ -614,7 +617,7 @@ function ServiceCategoriesSection() {
             return (
               <Link key={category.title} href={category.href} className="group rounded-lg border border-border-subtle bg-white/78 p-5 shadow-card backdrop-blur-xl transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-glow">
                 <div className="flex items-start justify-between gap-4">
-                  <span className="grid h-12 w-12 place-items-center rounded-md bg-primary-subtle text-primary ring-1 ring-primary/10 transition group-hover:bg-primary group-hover:text-white">
+                  <span className="grid h-12 w-12 place-items-center rounded-md bg-primary-subtle text-primary ring-1 ring-primary/10 transition group-hover:bg-primary group-hover:text-on-primary">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-black text-emerald-700">{category.proof}</span>
@@ -648,7 +651,7 @@ function LiveActivitySection() {
   } satisfies Record<ActivityItem["tone"], string>;
 
   return (
-    <section className="border-y border-border-subtle bg-white/72 px-4 py-16 backdrop-blur-xl sm:px-6 lg:px-8">
+    <section className="border-y border-white/10 bg-white/[0.04] px-4 py-16 backdrop-blur-xl sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
         <div>
           <SectionHeader
@@ -669,30 +672,34 @@ function LiveActivitySection() {
             ))}
           </div>
         </div>
-        <div className="relative h-[360px] overflow-hidden rounded-lg border border-border-subtle bg-slate-950 p-4 text-white shadow-floating">
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-slate-950 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-slate-950 to-transparent" />
+        <div className="relative h-[360px] overflow-hidden rounded-lg border border-border-subtle bg-white/78 p-4 text-foreground shadow-floating">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-[#FBFAFF] to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-[#FBFAFF] to-transparent" />
           <div className="animate-scroll-up space-y-3">
-            {scrollingItems.map((item, index) => (
-              <article key={`${item.title}-${index}`} className="rounded-md border border-white/10 bg-white/[0.06] p-4 backdrop-blur-xl">
-                <div className="flex items-start gap-3">
-                  <span className="relative mt-1 flex h-2.5 w-2.5 shrink-0">
-                    <span className={cn("absolute inline-flex h-full w-full animate-ping rounded-full opacity-70", toneClass[item.tone])} />
-                    <span className={cn("relative inline-flex h-2.5 w-2.5 rounded-full", toneClass[item.tone])} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h3 className="text-sm font-black text-white">{item.title}</h3>
-                      <span className="inline-flex items-center gap-1 text-xs font-bold text-indigo-200">
-                        <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                        {item.city}
-                      </span>
+            {scrollingItems.map((item, index) => {
+              const isDuplicate = index >= activityItems.length;
+
+              return (
+                <article key={`${item.title}-${index}`} aria-hidden={isDuplicate} className="rounded-md border border-white/10 bg-white/[0.06] p-4 backdrop-blur-xl">
+                  <div className="flex items-start gap-3">
+                    <span className="relative mt-1 flex h-2.5 w-2.5 shrink-0">
+                      <span className={cn("absolute inline-flex h-full w-full animate-ping rounded-full opacity-70", toneClass[item.tone])} />
+                      <span className={cn("relative inline-flex h-2.5 w-2.5 rounded-full", toneClass[item.tone])} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h3 className="text-sm font-black text-white">{item.title}</h3>
+                        <span className="inline-flex items-center gap-1 text-xs font-bold text-indigo-200">
+                          <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                          {item.city}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs font-semibold leading-5 text-slate-300">{item.detail}</p>
                     </div>
-                    <p className="mt-1 text-xs font-semibold leading-5 text-slate-300">{item.detail}</p>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -703,41 +710,41 @@ function LiveActivitySection() {
 function CityJobsAndEngineersSection() {
   return (
     <section className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-[1500px] gap-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)]">
+      <div className="mx-auto grid max-w-[1500px] gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(340px,0.78fr)] xl:gap-16 2xl:gap-20">
         <div>
           <SectionHeader
             eyebrow="Location-first discovery"
             title="Nearby jobs by city, area, payout, and trust."
             description="Clients see regional supply and engineers see nearby work with enough context to decide fast."
           />
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid max-w-[980px] gap-3 md:grid-cols-2 xl:-ml-3 xl:max-w-[940px] 2xl:-ml-4">
             {cityJobs.map((job) => (
-              <article key={`${job.city}-${job.area}`} className="rounded-lg border border-border-subtle bg-white/78 p-4 shadow-card backdrop-blur-xl transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
-                <div className="flex items-start justify-between gap-4">
+              <article key={`${job.city}-${job.area}`} className="rounded-lg border border-border-subtle bg-white/78 p-3.5 shadow-card backdrop-blur-xl transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
+                <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="inline-flex items-center gap-1.5 text-xs font-black uppercase text-primary">
+                    <p className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase text-primary">
                       <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
                       {job.city}
                     </p>
-                    <h3 className="mt-2 text-base font-black text-foreground">{job.category}</h3>
+                    <h3 className="mt-2 text-[15px] font-black text-foreground">{job.category}</h3>
                     <p className="mt-1 text-xs font-semibold text-muted-foreground">{job.area}</p>
                   </div>
-                  <span className={cn("rounded-full border px-2.5 py-1 text-[11px] font-black", job.urgency === "Emergency" ? "border-red-200 bg-red-50 text-red-700" : job.urgency === "Urgent" ? "border-orange-200 bg-orange-50 text-orange-700" : "border-slate-200 bg-slate-100 text-slate-700")}>
+                  <span className={cn("rounded-full border px-2 py-0.5 text-[10px] font-black", job.urgency === "Emergency" ? "border-red-200 bg-red-50 text-red-700" : job.urgency === "Urgent" ? "border-orange-200 bg-orange-50 text-orange-700" : "border-slate-200 bg-slate-100 text-slate-700")}>
                     {job.urgency}
                   </span>
                 </div>
-                <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
                   <div className="rounded-md border border-border-subtle bg-surface p-2">
-                    <p className="text-[11px] font-black text-muted-foreground">Budget</p>
-                    <p className="mt-1 text-sm font-black text-foreground">{job.budget}</p>
+                    <p className="text-[10px] font-black text-muted-foreground">Budget</p>
+                    <p className="mt-1 text-xs font-black text-foreground">{job.budget}</p>
                   </div>
                   <div className="rounded-md border border-emerald-200 bg-emerald-50 p-2">
-                    <p className="text-[11px] font-black text-emerald-700">Payout</p>
-                    <p className="mt-1 text-sm font-black text-emerald-800">{job.payout}</p>
+                    <p className="text-[10px] font-black text-emerald-700">Payout</p>
+                    <p className="mt-1 text-xs font-black text-emerald-800">{job.payout}</p>
                   </div>
                   <div className="rounded-md border border-primary/20 bg-primary-subtle p-2">
-                    <p className="text-[11px] font-black text-primary">Trust</p>
-                    <p className="mt-1 text-sm font-black text-primary">{job.trust}</p>
+                    <p className="text-[10px] font-black text-primary">Trust</p>
+                    <p className="mt-1 text-xs font-black text-primary">{job.trust}</p>
                   </div>
                 </div>
               </article>
@@ -750,26 +757,26 @@ function CityJobsAndEngineersSection() {
             title="Verified specialists ready for real site execution."
             description="Preview engineers by city, category fit, trust score, response speed, and completed work."
           />
-          <div className="grid gap-3">
+          <div className="grid gap-3 xl:ml-auto xl:max-w-[700px] 2xl:translate-x-3">
             {engineers.map((engineer) => (
-              <article key={engineer.name} className="rounded-lg border border-border-subtle bg-white/78 p-4 shadow-card backdrop-blur-xl">
+              <article key={engineer.name} className="rounded-lg border border-border-subtle bg-white/78 p-3.5 shadow-card backdrop-blur-xl">
                 <div className="flex items-start gap-3">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-secondary text-sm font-black text-on-primary shadow-md">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-secondary text-xs font-black text-on-primary shadow-md">
                     {engineer.initials}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-base font-black text-foreground">{engineer.name}</h3>
-                      <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-black text-emerald-700">Trust {engineer.trust}</span>
+                      <h3 className="text-[15px] font-black text-foreground">{engineer.name}</h3>
+                      <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-black text-emerald-700">Trust {engineer.trust}</span>
                     </div>
-                    <p className="mt-1 text-sm font-semibold text-muted-foreground">{engineer.category}</p>
-                    <p className="mt-2 flex items-center gap-1.5 text-xs font-bold text-muted-foreground">
+                    <p className="mt-1 text-xs font-semibold text-muted-foreground">{engineer.category}</p>
+                    <p className="mt-1.5 flex items-center gap-1.5 text-xs font-bold text-muted-foreground">
                       <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
                       {engineer.area}, {engineer.city}
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
+                <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
                   <div className="rounded-md border border-border-subtle bg-surface p-2">
                     <p className="font-bold text-muted-foreground">Completed</p>
                     <p className="mt-1 font-black text-foreground">{engineer.jobs} jobs</p>
@@ -782,7 +789,7 @@ function CityJobsAndEngineersSection() {
               </article>
             ))}
           </div>
-          <Link href="/engineers" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-4 py-3 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5">
+          <Link href="/engineers" className="mt-4 flex w-full items-center justify-center gap-2 rounded-md border border-[#b0bf1a] bg-[#b0bf1a] px-4 py-3 text-sm font-black text-slate-950 shadow-sm shadow-[#b0bf1a]/25 transition hover:-translate-y-0.5 hover:border-[#c1cf25] hover:bg-[#c1cf25] active:translate-y-0 active:scale-[0.98] active:border-[#98a612] active:bg-[#98a612] xl:ml-auto xl:max-w-[700px] 2xl:translate-x-3">
             Discover engineers
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
@@ -794,12 +801,12 @@ function CityJobsAndEngineersSection() {
 
 function CredibilitySection() {
   return (
-    <section className="bg-slate-950 px-4 py-16 text-white sm:px-6 lg:px-8">
+    <section className="border-y border-white/10 bg-white/[0.04] px-4 py-16 backdrop-blur-xl sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <SectionHeader
           eyebrow="Client trust"
           title="Built for facilities, operations, compliance, and finance teams."
-          description="ELV Connect keeps proof, profile quality, work orders, payout state, and site follow-up visible from first request to final handover."
+          description="ELV Verse keeps proof, profile quality, work orders, payout state, and site follow-up visible from first request to final handover."
         />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
@@ -810,12 +817,12 @@ function CredibilitySection() {
           ].map((item) => {
             const Icon = item.icon;
             return (
-              <article key={item.title} className="rounded-lg border border-white/10 bg-white/[0.05] p-5 shadow-lg backdrop-blur-xl">
-                <span className="grid h-11 w-11 place-items-center rounded-md bg-white/10 text-indigo-200">
+              <article key={item.title} className="rounded-lg border border-border-subtle bg-white/78 p-5 shadow-card backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg">
+                <span className="grid h-11 w-11 place-items-center rounded-md bg-primary-subtle text-primary">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <h3 className="mt-5 text-lg font-black text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p>
+                <h3 className="mt-5 text-lg font-black text-foreground">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.detail}</p>
               </article>
             );
           })}
@@ -870,7 +877,7 @@ function HowItWorksSection() {
 
 function ReviewsSection() {
   return (
-    <section className="border-y border-border-subtle bg-white/72 px-4 py-16 backdrop-blur-xl sm:px-6 lg:px-8">
+    <section className="border-y border-white/10 bg-white/[0.04] px-4 py-16 backdrop-blur-xl sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <SectionHeader
           eyebrow="Reviews and reputation"
@@ -927,7 +934,7 @@ function MultilingualContactSection() {
             ))}
           </div>
         </div>
-        <div className="rounded-lg border border-primary/20 bg-gradient-to-br from-primary-subtle via-white to-sky-50 p-6 shadow-glow">
+        <div className="rounded-lg border border-white/14 bg-white/[0.08] p-6 shadow-glow backdrop-blur-xl">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-primary">Fast follow-up</p>
           <h2 className="mt-2 text-3xl font-black tracking-tight text-foreground">Need an engineer, survey, or callback today?</h2>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
@@ -953,7 +960,7 @@ function MultilingualContactSection() {
               );
             })}
           </div>
-          <Link href="/post-requirement" className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-5 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5">
+          <Link href="/post-requirement" className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2 text-sm font-black text-on-primary shadow-glow transition hover:-translate-y-0.5 hover:bg-primary-container">
             Start follow-up
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
@@ -992,15 +999,15 @@ function ComplianceSection() {
 function CtaBanner({ onPostJob }: { onPostJob: () => void }) {
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1500px] overflow-hidden rounded-lg border border-white/20 bg-gradient-to-br from-elv-indigo via-elv-violet to-elv-purple p-6 text-white shadow-glow md:p-8">
+      <div className="mx-auto max-w-[1500px] overflow-hidden rounded-lg border border-[#78d5ff]/60 bg-[#0caaf6] p-6 text-white shadow-glow md:p-8">
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-indigo-100">
+            <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-white">
               <Globe2 className="h-4 w-4" aria-hidden="true" />
               National ELV marketplace
             </p>
             <h2 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">Post trusted work or start finding verified ELV jobs today.</h2>
-            <p className="mt-3 max-w-3xl text-sm font-semibold leading-6 text-white/72">
+            <p className="mt-3 max-w-3xl text-sm font-semibold leading-6 text-white/90">
               One marketplace for site surveys, verified engineers, milestone evidence, work orders, payments, and reputation.
             </p>
           </div>
@@ -1008,12 +1015,12 @@ function CtaBanner({ onPostJob }: { onPostJob: () => void }) {
             <button
               type="button"
               onClick={onPostJob}
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-black text-elv-indigo shadow-md transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-black/10 bg-white px-5 py-3 text-sm font-black text-black shadow-md transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring"
             >
               Post a Job
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
-            <Link href="/jobs" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-white/20 bg-white/10 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-white/16 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30">
+            <Link href="/jobs" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-[#b0bf1a] bg-[#b0bf1a] px-5 py-3 text-sm font-black text-slate-950 shadow-md shadow-[#b0bf1a]/25 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[#c1cf25] hover:bg-[#c1cf25] active:translate-y-0 active:scale-[0.98] active:border-[#98a612] active:bg-[#98a612] active:text-slate-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-ring">
               Find Work
             </Link>
           </div>
@@ -1032,7 +1039,7 @@ export default function PremiumLanding() {
   };
 
   return (
-    <main className="premium-shell text-foreground">
+    <main className="elv-dark-landing min-h-screen bg-slate-950 bg-[radial-gradient(circle_at_18%_18%,rgba(99,91,255,0.34),transparent_28rem),radial-gradient(circle_at_84%_12%,rgba(14,165,233,0.18),transparent_22rem),linear-gradient(135deg,#080b16_0%,#111827_48%,#1e1b4b_100%)] text-white">
       <HeroSection onPostJob={postRequirement} />
       <ServiceCategoriesSection />
       <LiveActivitySection />

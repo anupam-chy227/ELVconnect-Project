@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useQuery } from "@/hooks/useQuery";
 import { useExperiencePreferences } from "@/hooks/useExperiencePreferences";
+import { appendLocationSearchParams } from "@/lib/experience-preferences";
 import { ELVCategory, PaginatedResponse, User } from "@/types";
 import { EngineerCard } from "@/components/Engineers/EngineerCard";
 
@@ -59,19 +60,15 @@ export default function EngineersPage() {
   });
   const { location } = useExperiencePreferences();
 
-  const locationParams =
-    location.name === "All India"
-      ? ""
-      : location.name === "Current Location" && location.lat && location.lng
-        ? `?lat=${location.lat}&lng=${location.lng}&radius=100`
-        : `?city=${encodeURIComponent(location.name)}`;
-
   const { data, loading } = useQuery<PaginatedResponse<User>>(
-    `/users/engineers?${selectedSpecialization ? `specialization=${selectedSpecialization}` : ""}${locationParams.replace("?", selectedSpecialization ? "&" : "")}`,
+    appendLocationSearchParams(
+      `/users/engineers${selectedSpecialization ? `?specialization=${selectedSpecialization}` : ""}`,
+      location,
+    ),
     { enabled: true, retry: false, showErrorToast: false }
   );
 
-  const engineers = data?.data || [];
+  const engineers = Array.isArray(data) ? data : data?.data || [];
   const filteredEngineers = engineers.filter((engineer) => {
     const matchesSearch =
       engineer.profile.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -144,7 +141,7 @@ export default function EngineersPage() {
               placeholder="Scope notes: devices, floors, preferred brands..."
               className="mt-2 h-16 w-full rounded-md border border-border-subtle bg-surface px-3 py-2 text-xs shadow-sm outline-none focus:border-primary"
             />
-            <button className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-2 text-xs font-bold text-on-primary shadow-sm">
+            <button className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-bold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container">
               <Send className="h-3.5 w-3.5" />
               Submit hire request
             </button>
@@ -236,7 +233,7 @@ export default function EngineersPage() {
                   <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                   <h3 className="mt-2 text-sm font-bold">{engineer.name}</h3>
                   <p className="mt-1 text-xs text-muted-foreground">{engineer.spec} - {engineer.city}</p>
-                  <button className="mt-3 w-full rounded-md bg-gradient-to-b from-primary to-primary-container px-3 py-1.5 text-xs font-bold text-on-primary">
+                  <button className="mt-3 w-full rounded-md bg-primary px-3 py-1.5 text-xs font-bold text-on-primary hover:bg-primary-container">
                     Connect
                   </button>
                 </div>

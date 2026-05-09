@@ -37,6 +37,8 @@ const envSchema = z.object({
   SMTP_PASS: z.string().optional(),
   EMAIL_FROM: z.string().optional(),
   SENTRY_DSN: z.string().optional(),
+  LIBRETRANSLATE_URL: z.string().optional(),
+  LIBRETRANSLATE_API_KEY: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse(normalizedEnv);

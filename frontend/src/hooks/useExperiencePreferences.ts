@@ -2,11 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  getLocationByName,
+  applyDocumentLanguage,
+  getLanguageByCode,
+  getSavedLocationPreference,
+  getSavedLanguageCode,
   INDIA_LOCATIONS,
-  LANGUAGES,
+  LANGUAGE_CHANGE_EVENT,
+  LOCATION_CHANGE_EVENT,
   LocationOption,
-  STORAGE_KEYS,
   translate,
 } from "@/lib/experience-preferences";
 
@@ -16,35 +19,25 @@ export function useExperiencePreferences() {
 
   useEffect(() => {
     const sync = () => {
-      const savedLanguage = localStorage.getItem(STORAGE_KEYS.language) || "en-IN";
-      const savedLocation = localStorage.getItem(STORAGE_KEYS.location) || "All India";
-      const savedLat = Number(localStorage.getItem("elv-location-lat"));
-      const savedLng = Number(localStorage.getItem("elv-location-lng"));
+      const savedLanguage = getSavedLanguageCode();
       setLanguageCode(savedLanguage);
-      setLocation(
-        savedLocation === "Current Location" && savedLat && savedLng
-          ? { name: "Current Location", lat: savedLat, lng: savedLng }
-          : getLocationByName(savedLocation)
-      );
-      document.documentElement.lang = savedLanguage;
+      setLocation(getSavedLocationPreference());
+      applyDocumentLanguage(savedLanguage);
     };
 
     sync();
-    window.addEventListener("elv-language-change", sync);
-    window.addEventListener("elv-location-change", sync);
+    window.addEventListener(LANGUAGE_CHANGE_EVENT, sync);
+    window.addEventListener(LOCATION_CHANGE_EVENT, sync);
     window.addEventListener("storage", sync);
 
     return () => {
-      window.removeEventListener("elv-language-change", sync);
-      window.removeEventListener("elv-location-change", sync);
+      window.removeEventListener(LANGUAGE_CHANGE_EVENT, sync);
+      window.removeEventListener(LOCATION_CHANGE_EVENT, sync);
       window.removeEventListener("storage", sync);
     };
   }, []);
 
-  const language = useMemo(
-    () => LANGUAGES.find((item) => item.code === languageCode) || LANGUAGES[0],
-    [languageCode]
-  );
+  const language = useMemo(() => getLanguageByCode(languageCode), [languageCode]);
 
   return {
     language,

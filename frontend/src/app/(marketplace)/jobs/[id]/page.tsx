@@ -207,10 +207,10 @@ export default function JobDetailPage({ params }: JobDetailPageProps) {
                 <div className="rounded-md border border-sky-200 bg-sky-50 p-5 dark:border-sky-900 dark:bg-sky-950/30">
                   <p className="text-sm font-black text-sky-900 dark:text-sky-100">You posted this job</p>
                   <div className="mt-4 grid gap-2">
-                    <Link href="/dashboard/jobs" className="rounded-md bg-sky-600 px-4 py-2 text-center text-sm font-black text-white">
+                    <Link href="/dashboard/jobs" className="rounded-md bg-primary px-4 py-2 text-center text-sm font-black text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container">
                       View applications
                     </Link>
-                    <button type="button" className="rounded-md border border-sky-600 px-4 py-2 text-sm font-black text-sky-700 dark:text-sky-200">
+                    <button type="button" className="rounded-md border border-primary/35 px-4 py-2 text-sm font-black text-primary hover:bg-primary-subtle dark:text-primary">
                       Edit job
                     </button>
                   </div>

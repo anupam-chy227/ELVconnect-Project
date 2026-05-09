@@ -17,11 +17,11 @@ export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children">
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "border-transparent bg-gradient-to-r from-elv-iris to-elv-purple text-elv-text-inv shadow-md shadow-elv-purple/20 hover:shadow-glow",
+    "border-transparent bg-primary text-on-primary shadow-md shadow-primary/20 hover:bg-primary-container hover:shadow-glow",
   secondary:
-    "border-elv-border bg-elv-surface-2 text-elv-iris shadow-sm hover:border-elv-iris/40 hover:bg-white hover:shadow-md dark:border-elv-dark-border dark:bg-elv-dark-2 dark:text-indigo-200 dark:hover:bg-elv-dark-3",
+    "border-primary/25 bg-primary-subtle text-primary shadow-sm hover:border-primary/45 hover:bg-white hover:shadow-md dark:border-primary/35 dark:bg-primary-subtle dark:text-primary dark:hover:bg-surface-raised",
   ghost:
-    "border-transparent bg-transparent text-elv-iris shadow-none hover:bg-elv-surface-2/80 dark:text-indigo-200 dark:hover:bg-elv-dark-2",
+    "border-transparent bg-transparent text-primary shadow-none hover:bg-primary-subtle dark:text-primary dark:hover:bg-primary-subtle",
   danger:
     "border-transparent bg-gradient-to-r from-elv-danger to-rose-700 text-elv-text-inv shadow-md shadow-red-900/15 hover:shadow-lg hover:shadow-red-900/20",
   success:

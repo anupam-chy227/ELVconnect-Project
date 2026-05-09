@@ -1,4 +1,5 @@
 import type { ELVCategory, UserRole } from "@/types";
+import { LANGUAGES } from "@/lib/experience-preferences";
 
 export const USER_ROLES: Record<"CLIENT" | "ENGINEER" | "ADMIN", UserRole> = {
   CLIENT: "customer",
@@ -19,18 +20,9 @@ export const ELV_CATEGORIES: Array<{ id: ELVCategory; label: string }> = [
   { id: "other", label: "Other" },
 ];
 
-export const INDIAN_LANGUAGES = [
-  { code: "en-IN", label: "English", short: "EN" },
-  { code: "hi-IN", label: "Hindi", short: "हिं" },
-  { code: "bn-IN", label: "Bengali", short: "BN" },
-  { code: "te-IN", label: "Telugu", short: "TE" },
-  { code: "mr-IN", label: "Marathi", short: "MR" },
-  { code: "ta-IN", label: "Tamil", short: "TA" },
-  { code: "ur-IN", label: "Urdu", short: "UR" },
-  { code: "gu-IN", label: "Gujarati", short: "GU" },
-  { code: "kn-IN", label: "Kannada", short: "KN" },
-  { code: "ml-IN", label: "Malayalam", short: "ML" },
-  { code: "or-IN", label: "Odia", short: "OR" },
-  { code: "pa-IN", label: "Punjabi", short: "PA" },
-  { code: "as-IN", label: "Assamese", short: "AS" },
-];
+export const INDIAN_LANGUAGES = LANGUAGES.map(({ code, label, native, short }) => ({
+  code,
+  label,
+  native,
+  short,
+}));

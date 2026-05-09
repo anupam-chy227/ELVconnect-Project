@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { markDashboardNavigationIntent } from "@/components/Dashboard/DashboardLandingGuard";
+import { API_BASE_URL } from "@/lib/config";
 
 declare global {
   interface Window {
@@ -44,6 +44,10 @@ type GoogleAuthButtonProps = {
 const GOOGLE_SCRIPT_ID = "google-identity-services";
 let initializedClientId: string | null = null;
 let activeCredentialHandler: ((credential: string) => void) | null = null;
+
+function getGoogleStartUrl(apiBaseUrl: string, role: "customer" | "service_provider") {
+  return `${apiBaseUrl.replace(/\/$/, "")}/auth/google/start?role=${encodeURIComponent(role)}`;
+}
 
 function loadGoogleScript() {
   return new Promise<void>((resolve, reject) => {
@@ -87,7 +91,7 @@ export function GoogleAuthButton({
   const isSubmittingRef = useRef(false);
   const promptHandledRef = useRef(false);
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || API_BASE_URL;
 
   useEffect(() => {
     if (mode === "custom") {
@@ -107,8 +111,6 @@ export function GoogleAuthButton({
           setIsSubmitting(true);
           try {
             await loginWithGoogle(credential, role);
-            markDashboardNavigationIntent();
-            router.push("/dashboard");
           } finally {
             setIsSubmitting(false);
             isSubmittingRef.current = false;
@@ -160,7 +162,7 @@ export function GoogleAuthButton({
       disabled={!isReady || isSubmitting}
       onClick={() => {
         if (apiBaseUrl) {
-          window.location.href = `${apiBaseUrl}/auth/google/start?role=${role}`;
+          window.location.href = getGoogleStartUrl(apiBaseUrl, role);
           return;
         }
 
@@ -170,8 +172,6 @@ export function GoogleAuthButton({
           setIsSubmitting(true);
           try {
             await loginWithGoogle(credential, role);
-            markDashboardNavigationIntent();
-            router.push("/dashboard");
           } finally {
             setIsSubmitting(false);
             isSubmittingRef.current = false;
@@ -192,7 +192,7 @@ export function GoogleAuthButton({
         window.setTimeout(() => {
           if (!promptHandledRef.current && !isSubmittingRef.current) {
             if (apiBaseUrl) {
-              window.location.href = `${apiBaseUrl}/auth/google/start?role=${role}`;
+              window.location.href = getGoogleStartUrl(apiBaseUrl, role);
             } else {
               router.push(fallbackHref);
             }
@@ -201,10 +201,10 @@ export function GoogleAuthButton({
       }}
       className={
         className ||
-        "flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+        "flex w-full items-center justify-center gap-3 rounded-lg border border-primary/25 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-primary/45 hover:bg-primary-subtle disabled:cursor-not-allowed disabled:opacity-60"
       }
     >
-      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-base font-bold text-blue-600">
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-base font-bold text-primary">
         G
       </span>
       {isSubmitting ? "Signing in..." : label}

@@ -89,7 +89,7 @@ export function EngineerCard({ engineer }: EngineerCardProps) {
 
           {engineer.profile.bio ? <p className="mt-4 line-clamp-2 text-sm leading-6 text-muted-foreground">{engineer.profile.bio}</p> : null}
 
-          <span className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container px-4 py-2.5 text-sm font-black text-on-primary shadow-sm transition group-hover:-translate-y-0.5 group-hover:shadow-md">
+          <span className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-black text-on-primary shadow-sm shadow-primary/20 transition group-hover:-translate-y-0.5 group-hover:bg-primary-container group-hover:shadow-md">
             Connect Now
           </span>
         </div>

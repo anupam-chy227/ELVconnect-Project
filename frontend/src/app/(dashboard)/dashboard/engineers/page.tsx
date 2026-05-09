@@ -27,7 +27,7 @@ export default function DashboardEngineersPage() {
           </div>
           <Link
             href="/engineers"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-purple-600 px-5 py-3 font-medium text-white transition-colors hover:bg-purple-700"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 font-medium text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
           >
             <Search className="h-4 w-4" />
             Browse Directory
@@ -49,7 +49,7 @@ export default function DashboardEngineersPage() {
             </p>
             <Link
               href="/engineers"
-              className="mt-6 inline-flex items-center rounded-lg bg-purple-600 px-5 py-3 font-medium text-white transition-colors hover:bg-purple-700"
+              className="mt-6 inline-flex items-center rounded-lg bg-primary px-5 py-3 font-medium text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
             >
               Open public engineer directory
             </Link>

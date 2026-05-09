@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo } from "react";
 import type { ReactNode } from "react";
 
 export type Theme = "light" | "dark";
@@ -16,62 +16,29 @@ type ThemeContextValue = {
 const THEME_KEY = "elv-theme";
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function getSystemTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function resolveTheme(preference: ThemePreference): Theme {
-  return preference === "system" ? getSystemTheme() : preference;
-}
-
-function resolvePreference(value: string | undefined): ThemePreference {
-  if (value === "dark" || value === "light" || value === "system") return value;
-  return "system";
-}
-
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [preference, setPreference] = useState<ThemePreference>("system");
-  const [theme, setResolvedTheme] = useState<Theme>("light");
+  const theme: Theme = "light";
+  const preference: ThemePreference = "light";
 
   useEffect(() => {
-    let isMounted = true;
-
-    queueMicrotask(() => {
-      if (isMounted) {
-        setPreference(resolvePreference(localStorage.getItem(THEME_KEY) ?? undefined));
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
+    document.documentElement.classList.remove("dark");
+    document.documentElement.dataset.theme = "light";
+    document.documentElement.dataset.themePreference = "light";
+    document.documentElement.style.colorScheme = "light";
+    localStorage.removeItem(THEME_KEY);
   }, []);
 
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const syncTheme = () => {
-      const nextTheme = resolveTheme(preference);
-      setResolvedTheme(nextTheme);
-      document.documentElement.classList.toggle("dark", nextTheme === "dark");
-      document.documentElement.style.colorScheme = nextTheme;
-    };
-
-    syncTheme();
-    media.addEventListener("change", syncTheme);
-
-    return () => media.removeEventListener("change", syncTheme);
-  }, [preference]);
-
-  const setTheme = useCallback((nextTheme: ThemePreference) => {
-    setPreference(nextTheme);
-    localStorage.setItem(THEME_KEY, nextTheme);
+  const setTheme = useCallback((_nextTheme: ThemePreference) => {
+    document.documentElement.classList.remove("dark");
+    document.documentElement.dataset.theme = "light";
+    document.documentElement.dataset.themePreference = "light";
+    document.documentElement.style.colorScheme = "light";
+    localStorage.removeItem(THEME_KEY);
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  }, [setTheme, theme]);
+    setTheme("light");
+  }, [setTheme]);
 
   const value = useMemo(
     () => ({
@@ -80,7 +47,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setTheme,
       toggleTheme,
     }),
-    [preference, setTheme, theme, toggleTheme],
+    [setTheme, toggleTheme],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

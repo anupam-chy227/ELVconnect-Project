@@ -25,7 +25,7 @@ const statusStyles = {
   },
   current: {
     item: "border-primary/35 bg-primary-subtle text-primary shadow-sm",
-    marker: "bg-gradient-to-b from-primary to-primary-container text-white ring-primary/25",
+    marker: "bg-primary text-on-primary ring-primary/25",
     bar: "bg-gradient-to-r from-primary to-secondary",
     icon: Clock3,
   },

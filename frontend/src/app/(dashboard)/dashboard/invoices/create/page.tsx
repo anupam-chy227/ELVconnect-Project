@@ -209,7 +209,7 @@ export default function CreateInvoicePage() {
                 name="type"
                 value={formData.type}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               >
                 {types.map((t) => (
                   <option key={t.value} value={t.value}>
@@ -227,7 +227,7 @@ export default function CreateInvoicePage() {
                 name="template"
                 value={formData.template}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               >
                 <option value="classic">Classic</option>
                 <option value="modern">Modern</option>
@@ -246,7 +246,7 @@ export default function CreateInvoicePage() {
                 placeholder="Customer Name *"
                 value={formData.to.name}
                 onChange={handleInputChange}
-                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
               <input
                 type="text"
@@ -254,7 +254,7 @@ export default function CreateInvoicePage() {
                 placeholder="Company Name"
                 value={formData.to.companyName}
                 onChange={handleInputChange}
-                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
               <input
                 type="email"
@@ -262,7 +262,7 @@ export default function CreateInvoicePage() {
                 placeholder="Email *"
                 value={formData.to.email}
                 onChange={handleInputChange}
-                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
               <input
                 type="tel"
@@ -270,7 +270,7 @@ export default function CreateInvoicePage() {
                 placeholder="Phone"
                 value={formData.to.phone}
                 onChange={handleInputChange}
-                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
               <input
                 type="text"
@@ -278,7 +278,7 @@ export default function CreateInvoicePage() {
                 placeholder="Address"
                 value={formData.to.address}
                 onChange={handleInputChange}
-                className="md:col-span-2 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="md:col-span-2 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function CreateInvoicePage() {
                 placeholder="Project Name"
                 value={formData.projectName}
                 onChange={handleInputChange}
-                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
               <input
                 type="text"
@@ -301,7 +301,7 @@ export default function CreateInvoicePage() {
                 placeholder="PO Number"
                 value={formData.poNumber}
                 onChange={handleInputChange}
-                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
               <input
                 type="text"
@@ -309,7 +309,7 @@ export default function CreateInvoicePage() {
                 placeholder="Site Address"
                 value={formData.siteAddress}
                 onChange={handleInputChange}
-                className="md:col-span-2 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="md:col-span-2 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
             </div>
           </div>
@@ -321,7 +321,7 @@ export default function CreateInvoicePage() {
               <button
                 type="button"
                 onClick={addLineItem}
-                className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors"
+                className="flex items-center gap-2 rounded-lg border border-primary/25 bg-primary-subtle px-4 py-2 text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle"
               >
                 <Plus className="w-4 h-4" />
                 Add Item
@@ -422,7 +422,7 @@ export default function CreateInvoicePage() {
                 name="invoiceDate"
                 value={formData.invoiceDate}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
             </div>
 
@@ -435,7 +435,7 @@ export default function CreateInvoicePage() {
                 name="dueDate"
                 value={formData.dueDate}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
             </div>
 
@@ -450,7 +450,7 @@ export default function CreateInvoicePage() {
                 onChange={handleInputChange}
                 step="0.01"
                 min="0"
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
             </div>
 
@@ -466,7 +466,7 @@ export default function CreateInvoicePage() {
                 step="0.01"
                 min="0"
                 max="100"
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
               />
             </div>
           </div>
@@ -482,17 +482,17 @@ export default function CreateInvoicePage() {
               onChange={handleInputChange}
               placeholder="Add any additional notes or payment instructions..."
               rows={4}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
             />
           </div>
 
           {/* Grand Total Preview */}
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6 border-2 border-purple-200">
+          <div className="rounded-lg border-2 border-primary/25 bg-primary-subtle p-6">
             <div className="flex justify-between items-center">
               <span className="text-lg font-bold text-gray-900">
                 Grand Total:
               </span>
-              <span className="text-3xl font-bold text-purple-600">
+              <span className="text-3xl font-bold text-primary">
                 {formData.currency} {calculateGrandTotal().toFixed(2)}
               </span>
             </div>
@@ -503,14 +503,14 @@ export default function CreateInvoicePage() {
             <button
               type="submit"
               disabled={createInvoiceMutation.loading || formData.lineItems.length === 0}
-              className="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white rounded-lg font-semibold transition-colors"
+              className="flex-1 rounded-lg bg-primary px-6 py-3 font-semibold text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container disabled:bg-gray-400"
             >
               {createInvoiceMutation.loading ? "Creating..." : "Create Invoice"}
             </button>
             <button
               type="button"
               onClick={() => router.back()}
-              className="px-6 py-3 border-2 border-gray-300 text-gray-900 rounded-lg font-semibold hover:border-gray-400 transition-colors"
+              className="rounded-lg border-2 border-primary/25 px-6 py-3 font-semibold text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle"
             >
               Cancel
             </button>

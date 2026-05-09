@@ -326,7 +326,7 @@ export default function AdminQaAuditPage() {
                       value={search}
                       onChange={(event) => setSearch(event.target.value)}
                       placeholder="Project, city, owner..."
-                      className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-indigo-950"
+                      className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
                     />
                   </div>
                 </label>
@@ -480,7 +480,7 @@ export default function AdminQaAuditPage() {
                     className={`grid gap-3 rounded-md border p-3 text-left transition hover:-translate-y-0.5 hover:shadow-lg sm:grid-cols-[112px_1fr] ${
                       active
                         ? "border-indigo-300 bg-indigo-50/75 ring-4 ring-indigo-100 dark:border-indigo-800 dark:bg-indigo-950/30 dark:ring-indigo-950"
-                        : "border-slate-200 bg-white hover:border-indigo-200 dark:border-slate-800 dark:bg-slate-950"
+                        : "border-slate-200 bg-white hover:border-primary/35 dark:border-slate-800 dark:bg-slate-950"
                     }`}
                   >
                     <div className={`flex min-h-24 items-center justify-center rounded-md bg-gradient-to-br ${proof.tone} text-white shadow-inner`}>
@@ -603,7 +603,7 @@ function FilterSelect({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-indigo-950"
+        className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm font-bold text-slate-800 shadow-sm outline-none transition focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
       >
         {options.map((option) => (
           <option key={option} value={option}>

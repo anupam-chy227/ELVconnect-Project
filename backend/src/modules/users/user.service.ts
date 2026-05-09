@@ -1,6 +1,33 @@
 import { User } from './user.model';
 import { Types } from 'mongoose';
 
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+const LOCATION_ALIASES: Record<string, string[]> = {
+  'Delhi NCR': ['Delhi NCR', 'Delhi', 'New Delhi', 'Gurugram', 'Gurgaon', 'Noida', 'Faridabad', 'Ghaziabad', 'Manesar'],
+  Maharashtra: ['Maharashtra', 'Mumbai', 'Pune', 'Navi Mumbai', 'Thane', 'Nagpur', 'Chakan'],
+  Karnataka: ['Karnataka', 'Bengaluru', 'Bangalore', 'Mysuru'],
+  Telangana: ['Telangana', 'Hyderabad', 'Secunderabad'],
+  Gujarat: ['Gujarat', 'Ahmedabad', 'Surat', 'Vadodara', 'Rajkot'],
+  'Tamil Nadu': ['Tamil Nadu', 'Chennai', 'Coimbatore', 'Madurai'],
+  'West Bengal': ['West Bengal', 'Kolkata', 'Howrah'],
+};
+
+function getCityPatterns(city: string) {
+  return (LOCATION_ALIASES[city] || [city]).map((alias) => new RegExp(escapeRegExp(alias), 'i'));
+}
+
+function toFiniteNumber(value: string | undefined) {
+  if (value === undefined || value.trim() === '') {
+    return undefined;
+  }
+
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : undefined;
+}
+
 // ── Get Profile ───────────────────────────────────────────────────────────
 export const getProfile = async (userId: string) => {
   const user = await User.findById(userId).select('-refreshTokens -passwordResetToken -passwordResetExpires');
@@ -92,24 +119,32 @@ export const listEngineers = async (query: {
   const filter: any = { role: 'service_provider', isActive: true };
   if (query.verified !== false) filter['serviceProvider.isVerified'] = true;
   if (query.specialization) filter['serviceProvider.specializations'] = query.specialization;
-  if (query.city) filter['serviceProvider.serviceArea.city'] = new RegExp(query.city, 'i');
+  if (query.city) {
+    filter.$or = getCityPatterns(query.city).flatMap((cityPattern) => [
+      { 'serviceProvider.serviceArea.city': cityPattern },
+      { 'serviceProvider.serviceArea.country': cityPattern },
+    ]);
+  }
 
   const page = query.page || 1;
   const limit = Math.min(query.limit || 20, 50);
   const skip = (page - 1) * limit;
 
-  if (query.lat && query.lng) {
-    const radiusKm = parseFloat(query.radius || '25');
+  const lat = toFiniteNumber(query.lat);
+  const lng = toFiniteNumber(query.lng);
+  if (lat !== undefined && lng !== undefined) {
+    const radiusKm = toFiniteNumber(query.radius) || 25;
     const data = await User.find({
       ...filter,
       'serviceProvider.location': {
         $near: {
-          $geometry: { type: 'Point', coordinates: [parseFloat(query.lng), parseFloat(query.lat)] },
+          $geometry: { type: 'Point', coordinates: [lng, lat] },
           $maxDistance: radiusKm * 1000,
         },
       },
     }).select('profile businessDetails.licenseNumber serviceProvider').skip(skip).limit(limit);
-    return { data };
+    const total = data.length;
+    return { data, pagination: { total, page, limit, totalPages: Math.ceil(total / limit) } };
   }
 
   const [data, total] = await Promise.all([
@@ -122,6 +157,19 @@ export const listEngineers = async (query: {
   ]);
 
   return { data, pagination: { total, page, limit, totalPages: Math.ceil(total / limit) } };
+};
+
+// ── Get Single Engineer Profile (public) ─────────────────────────────────
+export const getEngineerById = async (engineerId: string) => {
+  if (!Types.ObjectId.isValid(engineerId)) {
+    throw Object.assign(new Error('Invalid engineer ID'), { statusCode: 400, code: 'INVALID_ID' });
+  }
+  const engineer = await User.findOne({ _id: engineerId, role: 'service_provider', isActive: true })
+    .select('profile businessDetails.licenseNumber serviceProvider');
+  if (!engineer) {
+    throw Object.assign(new Error('Engineer not found'), { statusCode: 404, code: 'NOT_FOUND' });
+  }
+  return engineer;
 };
 
 // ── Delete Account (soft) ─────────────────────────────────────────────────

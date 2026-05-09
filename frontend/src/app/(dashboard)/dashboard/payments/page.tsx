@@ -153,14 +153,14 @@ export default function PaymentsPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/dashboard/invoices"
-              className="rounded-lg border border-slate-200 bg-white px-5 py-2 font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+              className="rounded-lg border border-primary/25 bg-white px-5 py-2 font-semibold text-primary hover:border-primary/45 hover:bg-primary-subtle dark:border-primary/35 dark:bg-slate-900 dark:text-primary"
             >
               Invoices
             </Link>
             <button
               type="button"
               onClick={() => addToast("Payment report prepared for download", "success")}
-              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-5 py-2 font-semibold text-white hover:bg-purple-700"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2 font-semibold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container"
             >
               <Download className="h-4 w-4" />
               Export History
@@ -193,7 +193,7 @@ export default function PaymentsPage() {
                 <input
                   value={party}
                   onChange={(event) => setParty(event.target.value)}
-                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-purple-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                 />
               </Field>
               <Field label="Amount">
@@ -201,14 +201,14 @@ export default function PaymentsPage() {
                   type="number"
                   value={amount}
                   onChange={(event) => setAmount(event.target.value)}
-                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-purple-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                 />
               </Field>
               <Field label="Payment status">
                 <select
                   value={status}
                   onChange={(event) => setStatus(event.target.value as PaymentStatus)}
-                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-purple-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                 >
                   <option value="authorized">Authorized</option>
                   <option value="captured">Captured</option>
@@ -221,7 +221,7 @@ export default function PaymentsPage() {
                 <select
                   value={audience === "All" ? "Client" : audience}
                   onChange={(event) => setAudience(event.target.value as PaymentAudience)}
-                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-purple-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                 >
                   <option value="Client">Client</option>
                   <option value="Vendor">Vendor</option>
@@ -232,14 +232,14 @@ export default function PaymentsPage() {
                 <textarea
                   value={note}
                   onChange={(event) => setNote(event.target.value)}
-                  className="min-h-24 w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-purple-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                  className="min-h-24 w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring dark:border-slate-700 dark:bg-slate-950 dark:text-white"
                 />
               </Field>
-              <div className="rounded-xl border border-dashed border-purple-200 bg-purple-50 p-4 dark:border-purple-900 dark:bg-purple-950/40">
-                <p className="text-sm font-bold text-purple-800 dark:text-purple-100">
+              <div className="rounded-xl border border-dashed border-primary/30 bg-primary-subtle p-4 dark:border-primary/35 dark:bg-primary-subtle">
+                <p className="text-sm font-bold text-primary">
                   Selected: {selectedPaymentMode.title}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-purple-700 dark:text-purple-200">
+                <p className="mt-2 text-sm leading-6 text-primary">
                   {selectedPaymentMode.description}
                 </p>
                 <button
@@ -250,7 +250,7 @@ export default function PaymentsPage() {
                       "success"
                     )
                   }
-                  className="mt-4 w-full rounded-lg bg-purple-600 px-4 py-3 font-semibold text-white hover:bg-purple-700"
+                  className="mt-4 w-full rounded-lg bg-primary px-4 py-3 font-semibold text-on-primary shadow-sm shadow-primary/20 hover:bg-primary-container"
                 >
                   Create Payment Request
                 </button>
@@ -274,11 +274,11 @@ export default function PaymentsPage() {
                     onClick={() => setSelectedMode(mode.id)}
                     className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-all ${
                       active
-                        ? "border-purple-500 bg-purple-50 dark:bg-purple-950/40"
-                        : "border-slate-200 hover:border-purple-300 dark:border-slate-700 dark:hover:border-purple-700"
+                        ? "border-primary/45 bg-primary-subtle dark:bg-primary-subtle"
+                        : "border-slate-200 hover:border-primary/35 dark:border-slate-700 dark:hover:border-primary/45"
                     }`}
                   >
-                    <Icon className="mt-1 h-5 w-5 text-purple-600" />
+                    <Icon className="mt-1 h-5 w-5 text-primary" />
                     <span>
                       <span className="block font-bold text-slate-900 dark:text-white">{mode.title}</span>
                       <span className="mt-1 block text-sm text-slate-500 dark:text-slate-300">{mode.description}</span>
@@ -309,8 +309,8 @@ export default function PaymentsPage() {
                   onClick={() => setAudience(item)}
                   className={`rounded-lg px-4 py-2 text-sm font-semibold ${
                     audience === item
-                      ? "bg-purple-600 text-white"
-                      : "bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200"
+                      ? "bg-primary text-on-primary"
+                      : "bg-primary-subtle text-primary hover:bg-primary-subtle dark:bg-primary-subtle dark:text-primary"
                   }`}
                 >
                   {item}

@@ -49,7 +49,7 @@ export default function DashboardJobsPage() {
           </div>
           <Link
             href="/dashboard/jobs/create"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-purple-600 px-5 py-3 font-medium text-white transition-colors hover:bg-purple-700"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 font-medium text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
           >
             <Plus className="h-4 w-4" />
             Post a Job
@@ -72,7 +72,7 @@ export default function DashboardJobsPage() {
             </p>
             <Link
               href="/dashboard/jobs/create"
-              className="mt-6 inline-flex items-center rounded-lg bg-purple-600 px-5 py-3 font-medium text-white transition-colors hover:bg-purple-700"
+              className="mt-6 inline-flex items-center rounded-lg bg-primary px-5 py-3 font-medium text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
             >
               Create your first job
             </Link>
@@ -139,13 +139,13 @@ export default function DashboardJobsPage() {
                     <div className="mt-4 flex gap-3">
                       <Link
                         href={`/jobs/${job._id}`}
-                        className="flex-1 rounded-lg border border-purple-200 px-4 py-2 text-center text-sm font-medium text-purple-700 transition-colors hover:bg-purple-50"
+                        className="flex-1 rounded-lg border border-primary/25 px-4 py-2 text-center text-sm font-medium text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle"
                       >
                         View public
                       </Link>
                       <Link
                         href="/dashboard/applications"
-                        className="flex-1 rounded-lg bg-purple-600 px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-purple-700"
+                        className="flex-1 rounded-lg bg-primary px-4 py-2 text-center text-sm font-medium text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
                       >
                         Applications
                       </Link>

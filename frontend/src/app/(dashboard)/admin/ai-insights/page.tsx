@@ -354,7 +354,7 @@ export default function AdminAiInsightsPage() {
                     className={`rounded-md border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-lg ${
                       active
                         ? "border-indigo-300 bg-indigo-50/80 ring-4 ring-indigo-100 dark:border-indigo-800 dark:bg-indigo-950/30 dark:ring-indigo-950"
-                        : "border-slate-200 bg-white/85 hover:border-indigo-200 dark:border-slate-800 dark:bg-slate-950/75"
+                        : "border-slate-200 bg-white/85 hover:border-primary/35 dark:border-slate-800 dark:bg-slate-950/75"
                     }`}
                   >
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -480,7 +480,7 @@ export default function AdminAiInsightsPage() {
                     className={`w-full rounded-md border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-lg ${
                       active
                         ? "border-indigo-300 bg-indigo-50/75 ring-4 ring-indigo-100 dark:border-indigo-800 dark:bg-indigo-950/30 dark:ring-indigo-950"
-                        : "border-slate-200 bg-white hover:border-indigo-200 dark:border-slate-800 dark:bg-slate-950"
+                        : "border-slate-200 bg-white hover:border-primary/35 dark:border-slate-800 dark:bg-slate-950"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">

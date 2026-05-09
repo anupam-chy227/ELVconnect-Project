@@ -666,7 +666,7 @@ export function RegisterForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex w-full items-center justify-center gap-2 rounded-md bg-gradient-to-b from-primary to-primary-container py-2.5 font-black text-on-primary shadow-glow transition duration-200 hover:-translate-y-0.5 hover:shadow-floating disabled:bg-gray-400 disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-primary py-2.5 font-black text-on-primary shadow-glow transition duration-200 hover:-translate-y-0.5 hover:bg-primary-container hover:shadow-floating disabled:bg-gray-400 disabled:opacity-60"
           >
             {isSubmitting ? "Creating account..." : "Create Account"}
             {!isSubmitting && <ChevronRight className="w-4 h-4" />}

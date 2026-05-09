@@ -26,7 +26,7 @@ export const useMyProfile = (): SWRDataResult<User> => {
 };
 
 export const useMyJobs = (): SWRDataResult<Job[]> => {
-  const result = useSWR<Job[]>("/jobs/my-jobs", jobsAPI.getMyJobs);
+  const result = useSWR<Job[]>("/jobs/my", jobsAPI.getMyJobs);
   return result;
 };
 

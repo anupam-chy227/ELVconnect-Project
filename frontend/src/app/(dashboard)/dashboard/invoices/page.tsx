@@ -50,14 +50,14 @@ export default function InvoicesPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/dashboard/payments"
-              className="inline-flex items-center gap-2 rounded-lg border border-purple-200 bg-white px-6 py-2 font-medium text-purple-700 transition-colors hover:bg-purple-50"
+              className="inline-flex items-center gap-2 rounded-lg border border-primary/25 bg-white px-6 py-2 font-medium text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle"
             >
               <CreditCard className="h-4 w-4" />
               Payments
             </Link>
             <Link
               href="/dashboard/invoices/create"
-              className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+              className="rounded-lg bg-primary px-6 py-2 font-medium text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
             >
               + New Invoice
             </Link>
@@ -77,8 +77,8 @@ export default function InvoicesPage() {
               }}
               className={`px-4 py-2 rounded-lg font-medium transition-colors capitalize ${
                 statusFilter === status
-                  ? "bg-purple-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-primary text-on-primary"
+                  : "bg-primary-subtle text-primary hover:bg-primary-subtle"
               }`}
             >
               {status.replace("_", " ")}
@@ -99,7 +99,7 @@ export default function InvoicesPage() {
             </h3>
             <Link
               href="/dashboard/invoices/create"
-              className="inline-block mt-4 px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              className="mt-4 inline-block rounded-lg bg-primary px-6 py-2 text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container"
             >
               Create First Invoice
             </Link>
@@ -162,7 +162,7 @@ export default function InvoicesPage() {
                     <td className="px-6 py-4 text-sm">
                       <Link
                         href={`/dashboard/invoices/${invoice._id}`}
-                        className="text-purple-600 hover:text-purple-700 font-medium"
+                        className="font-medium text-primary hover:text-primary"
                       >
                         View
                       </Link>

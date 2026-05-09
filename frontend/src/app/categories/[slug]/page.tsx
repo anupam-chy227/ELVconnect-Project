@@ -17,6 +17,7 @@ import { MaterialSymbol } from "@/components/MaterialSymbol";
 import PublicImageSlider from "@/components/PublicImageSlider";
 import { categoryContent, getCategoryBySlug } from "@/lib/category-content";
 import { useExperiencePreferences } from "@/hooks/useExperiencePreferences";
+import { appendLocationSearchParams } from "@/lib/experience-preferences";
 import { useQuery } from "@/hooks/useQuery";
 import { Job, PaginatedResponse, User } from "@/types";
 
@@ -26,26 +27,12 @@ export default function CategoryDetailPage() {
   const category = selectedCategory || categoryContent[0];
   const { location } = useExperiencePreferences();
 
-  const locationParams =
-    location.name === "All India"
-      ? ""
-      : location.name === "Current Location" && location.lat && location.lng
-        ? `&lat=${location.lat}&lng=${location.lng}&radius=100`
-        : `&city=${encodeURIComponent(location.name)}`;
-
-  const engineerLocationParams =
-    location.name === "All India"
-      ? ""
-      : location.name === "Current Location" && location.lat && location.lng
-        ? `&lat=${location.lat}&lng=${location.lng}&radius=100`
-        : `&city=${encodeURIComponent(location.name)}`;
-
   const { data: jobsData, loading: jobsLoading } = useQuery<PaginatedResponse<Job>>(
-    `/jobs?status=open&category=${category.category}${locationParams}`,
+    appendLocationSearchParams(`/jobs?status=open&category=${category.category}`, location),
     { enabled: Boolean(selectedCategory), retry: false, showErrorToast: false }
   );
   const { data: engineersData, loading: engineersLoading } = useQuery<PaginatedResponse<User>>(
-    `/users/engineers?specialization=${category.category}${engineerLocationParams}`,
+    appendLocationSearchParams(`/users/engineers?specialization=${category.category}`, location),
     { enabled: Boolean(selectedCategory), retry: false, showErrorToast: false }
   );
 
@@ -66,8 +53,8 @@ export default function CategoryDetailPage() {
     );
   }
 
-  const jobs = jobsData?.data || [];
-  const engineers = engineersData?.data || [];
+  const jobs = Array.isArray(jobsData) ? jobsData : jobsData?.data || [];
+  const engineers = Array.isArray(engineersData) ? engineersData : engineersData?.data || [];
   const displayJobs = jobs.length > 0 ? jobs : getSampleJobs(category.category, location.name);
   const displayEngineers =
     engineers.length > 0 ? engineers : getSampleEngineers(category.category, location.name);

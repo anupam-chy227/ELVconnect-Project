@@ -197,7 +197,7 @@ export default function CreateJobPage() {
                   onChange={handleInputChange}
                   placeholder="e.g., CCTV Installation for Office Building"
                   maxLength={100}
-                  className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-purple-600 transition-colors ${
+                  className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring transition-colors ${
                     getFieldError("title")
                       ? "border-red-500"
                       : "border-gray-300"
@@ -223,7 +223,7 @@ export default function CreateJobPage() {
                   placeholder="Describe your project in detail..."
                   rows={6}
                   maxLength={5000}
-                  className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-purple-600 transition-colors ${
+                  className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring transition-colors ${
                     getFieldError("description")
                       ? "border-red-500"
                       : "border-gray-300"
@@ -255,9 +255,9 @@ export default function CreateJobPage() {
                         type="checkbox"
                         checked={formData.category.includes(cat)}
                         onChange={() => handleCategoryToggle(cat)}
-                        className="w-4 h-4 accent-purple-600 rounded cursor-pointer"
+                        className="w-4 h-4 accent-primary rounded cursor-pointer"
                       />
-                      <span className="text-sm text-gray-700 group-hover:text-purple-600 transition-colors capitalize">
+                      <span className="text-sm text-gray-700 group-hover:text-primary transition-colors capitalize">
                         {cat.replace(/_/g, " ")}
                       </span>
                     </label>
@@ -287,7 +287,7 @@ export default function CreateJobPage() {
                     value={formData.location.address}
                     onChange={handleInputChange}
                     placeholder="123 Main Street"
-                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-purple-600 transition-colors ${
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring transition-colors ${
                       getFieldError("location.address")
                         ? "border-red-500"
                         : "border-gray-300"
@@ -311,7 +311,7 @@ export default function CreateJobPage() {
                     value={formData.location.city}
                     onChange={handleInputChange}
                     placeholder="Dubai"
-                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-purple-600 transition-colors ${
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring transition-colors ${
                       getFieldError("location.city")
                         ? "border-red-500"
                         : "border-gray-300"
@@ -335,7 +335,7 @@ export default function CreateJobPage() {
                     value={formData.location.country}
                     onChange={handleInputChange}
                     placeholder="UAE"
-                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-purple-600 transition-colors ${
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring transition-colors ${
                       getFieldError("location.country")
                         ? "border-red-500"
                         : "border-gray-300"
@@ -364,7 +364,7 @@ export default function CreateJobPage() {
                     name="budget.type"
                     value={formData.budget.type}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
                   >
                     <option value="fixed">Fixed Price</option>
                     <option value="range">Price Range</option>
@@ -389,7 +389,7 @@ export default function CreateJobPage() {
                         placeholder="0"
                         step="100"
                         min="0"
-                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
                       />
                     </div>
 
@@ -406,7 +406,7 @@ export default function CreateJobPage() {
                           placeholder="0"
                           step="100"
                           min="0"
-                          className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                          className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring"
                         />
                       </div>
                     )}
@@ -429,7 +429,7 @@ export default function CreateJobPage() {
                     name="timeline.startDate"
                     value={formData.timeline.startDate}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-purple-600 transition-colors ${
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring transition-colors ${
                       getFieldError("timeline.startDate")
                         ? "border-red-500"
                         : "border-gray-300"
@@ -452,7 +452,7 @@ export default function CreateJobPage() {
                     name="timeline.deadline"
                     value={formData.timeline.deadline}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-purple-600 transition-colors ${
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:border-primary/45 focus:ring-4 focus:ring-primary-ring transition-colors ${
                       getFieldError("timeline.deadline")
                         ? "border-red-500"
                         : "border-gray-300"
@@ -480,7 +480,7 @@ export default function CreateJobPage() {
                     value="public"
                     checked={formData.visibility === "public"}
                     onChange={handleInputChange}
-                    className="w-4 h-4 accent-purple-600 cursor-pointer"
+                    className="w-4 h-4 accent-primary cursor-pointer"
                   />
                   <div>
                     <p className="font-medium text-gray-900">Public</p>
@@ -497,7 +497,7 @@ export default function CreateJobPage() {
                     value="invite_only"
                     checked={formData.visibility === "invite_only"}
                     onChange={handleInputChange}
-                    className="w-4 h-4 accent-purple-600 cursor-pointer"
+                    className="w-4 h-4 accent-primary cursor-pointer"
                   />
                   <div>
                     <p className="font-medium text-gray-900">Invite Only</p>
@@ -514,7 +514,7 @@ export default function CreateJobPage() {
               <button
                 type="submit"
                 disabled={createJobMutation.loading}
-                className="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+                className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-on-primary shadow-sm shadow-primary/20 transition-colors hover:bg-primary-container disabled:bg-gray-400"
               >
                 {createJobMutation.loading ? "Posting..." : "Post Job"}
                 {!createJobMutation.loading && <ChevronRight className="w-4 h-4" />}
@@ -522,7 +522,7 @@ export default function CreateJobPage() {
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="px-6 py-3 border-2 border-gray-300 hover:border-gray-400 text-gray-900 rounded-lg font-semibold transition-colors"
+                className="rounded-lg border-2 border-primary/25 px-6 py-3 font-semibold text-primary transition-colors hover:border-primary/45 hover:bg-primary-subtle"
               >
                 Cancel
               </button>

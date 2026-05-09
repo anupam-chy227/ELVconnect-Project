@@ -1,24 +1,43 @@
 
 > frontend@0.1.0 dev
-> next dev --hostname 127.0.0.1 --port 3000
+> next dev --hostname 127.0.0.1 --port 3000 --hostname 127.0.0.1 --port 3000
 
 ▲ Next.js 16.2.4 (Turbopack)
 - Local:         http://127.0.0.1:3000
 - Network:       http://127.0.0.1:3000
 - Environments: .env.local
-✓ Ready in 1467ms
+✓ Ready in 1681ms
 Creating turbopack project {
   dir: 'C:\\Users\\HP\\OneDrive\\Desktop\\ELV CONNECT\\frontend',
   testMode: true
 }
 
- GET / 200 in 1871ms (next.js: 1051ms, application-code: 820ms)
- GET / 200 in 829ms (next.js: 15ms, application-code: 814ms)
- GET /jobs 200 in 852ms (next.js: 222ms, application-code: 630ms)
- GET /dashboard/jobs/create 200 in 865ms (next.js: 372ms, application-code: 494ms)
- GET / 200 in 218ms (next.js: 14ms, application-code: 204ms)
-✓ Compiled in 2.5s
- GET / 200 in 463ms (next.js: 311ms, application-code: 152ms)
-✓ Compiled in 238ms
- GET / 200 in 390ms (next.js: 278ms, application-code: 112ms)
- GET / 200 in 504ms (next.js: 8ms, application-code: 497ms)
+ GET /login?returnUrl=%2Fdashboard%2Fcustomer 200 in 4.6s (next.js: 3.0s, application-code: 1642ms)
+ GET /dashboard/customer 200 in 502ms (next.js: 133ms, proxy.ts: 33ms, application-code: 336ms)
+ GET /dashboard/customer 200 in 596ms (next.js: 15ms, proxy.ts: 31ms, application-code: 550ms)
+✓ Compiled in 2.9s
+⚠ Fast Refresh had to perform a full reload when ./src/contexts/AuthContext.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /login?returnUrl=%2Fdashboard%2Fcustomer 200 in 1211ms (next.js: 242ms, application-code: 969ms)
+✓ Compiled in 1143ms
+ GET /auth/google/callback?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OWYyNDQ1OGQxNDNmOTZhNDRmOGM3YTQiLCJlbWFpbCI6ImNhbnVwYW0yMjdAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzc4MzI5MzM5LCJleHAiOjE3NzgzMzAyMzl9.A05ovFUgEhGqHO34UsDK8I-ElrYMYxpEyZgn1rqLVhI 200 in 188ms (next.js: 77ms, application-code: 111ms)
+ GET /dashboard/customer 200 in 553ms (next.js: 409ms, proxy.ts: 17ms, application-code: 127ms)
+ GET /dashboard/customer 200 in 203ms (next.js: 85ms, proxy.ts: 49ms, application-code: 70ms)
+○ Compiling /vendor ...
+ HEAD /vendor 200 in 9.8s (next.js: 5.4s, application-code: 4.4s)
+✓ Compiled in 744ms
+ GET /dashboard/customer 200 in 408ms (next.js: 129ms, proxy.ts: 110ms, application-code: 169ms)
+ GET /dashboard/customer 200 in 231ms (next.js: 10ms, proxy.ts: 17ms, application-code: 204ms)
+ GET /dashboard/customer 200 in 136ms (next.js: 15ms, proxy.ts: 18ms, application-code: 104ms)
+ HEAD /vendor 200 in 2.5s (next.js: 382ms, application-code: 2.1s)
+ GET /login?returnUrl=%2Fdashboard%2Fcustomer 200 in 659ms (next.js: 292ms, application-code: 367ms)
+ GET /login?returnUrl=%2Fdashboard%2Fcustomer 200 in 737ms (next.js: 24ms, application-code: 713ms)
+ GET / 200 in 2.7s (next.js: 329ms, application-code: 2.4s)
+✓ Compiled in 2s
+ GET / 200 in 1277ms (next.js: 656ms, application-code: 620ms)
+ GET /register 200 in 1863ms (next.js: 1107ms, application-code: 756ms)
+ GET /register/client 200 in 321ms (next.js: 157ms, application-code: 164ms)
+ GET /auth/google/callback?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OWYyNDQ1OGQxNDNmOTZhNDRmOGM3YTQiLCJlbWFpbCI6ImNhbnVwYW0yMjdAZ21haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzc4MzMxMDk4LCJleHAiOjE3NzgzMzE5OTh9.Lra3aigEKtNBn4jygXBbWW5gr7sKKNGj9WyXLP7_CXQ 200 in 1442ms (next.js: 92ms, application-code: 1350ms)
+ GET /dashboard/customer 200 in 358ms (next.js: 270ms, proxy.ts: 20ms, application-code: 69ms)
+✓ Compiled in 2.3s
+ GET /dashboard/customer 200 in 485ms (next.js: 260ms, proxy.ts: 112ms, application-code: 113ms)
+ GET /dashboard/customer 200 in 4.7s (next.js: 232ms, proxy.ts: 89ms, application-code: 4.4s)

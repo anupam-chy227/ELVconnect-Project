@@ -9,6 +9,10 @@ const router = Router();
 // GET /api/v1/users/engineers
 router.get('/engineers', userController.listEngineers);
 
+// Public: get single engineer profile
+// GET /api/v1/users/engineers/:id
+router.get('/engineers/:id', userController.getEngineerById);
+
 // Authenticated routes
 router.use(requireAuth);
 
